@@ -1,0 +1,295 @@
+<a class="scroll-top-arrow" href="javascript:void(0);"><i class="fa fa-angle-up"></i></a>
+
+<!--LOADER-->
+
+<!--LOADER-->
+
+<!-- START HEADER NAVIGATION -->
+
+<!-- END HEADER NAVIGATION -->
+
+<!--slider sec strat-->
+<section id="slider-sec" class="slider-sec parallax" style="background: url('assets/images/banner1.2.jpg');">
+</section>
+<!--slider sec end-->
+
+<!--Product Line Up Start -->
+<div class="product-listing">
+    <div class="container">
+        <div class="row no-gutters">
+
+            <!-- START STICKY NAV -->
+            <div class="col-12 col-lg-4 order-2 order-lg-1 sticky">
+                <div id="product-filter-nav" class="product-filter-nav mb-3">
+                    <div class="product-category">
+                        <h5 class="filter-heading-set  text-center text-lg-left">Danh mục</h5>
+                        <ul style="max-height: 200px !important; overflow-y: auto;">
+                            <li (click)="changeList('Tất cả sản phẩm', emptyGuid)"><a href="javascript:void(0)">Tất cả </a></li>
+                            <li *ngFor="let item of listCategory" (click)="changeList(item.name, item.id)"><a href="javascript:void(0)" >{{item.name}} </a></li>
+                        </ul>
+                    </div>
+                    <div class="product-price mt-1">
+                        <h5 class="filter-heading">Shop By</h5>
+                        <div style="margin: 20px 0;">
+                            <div style="margin-bottom: 10px;">
+                              Range: {{priceRange[0] | formatVnd}} -  {{priceRange[1] | formatVnd}}
+                            </div>
+                            <p-slider [(ngModel)]="priceRange" [min]="0" [max]="1000000" range="true"></p-slider>
+                        </div>
+
+                    </div>
+
+                    <button class="btn yellow-color-green-gradient-btn mt-1" (click)="setFilter()">Filter</button>
+
+                    <div class="product-add mt-4">
+                        <div class="row no-gutters">
+                            <div class="col-12">
+                                <img src="assets/images/advertisement.jpg" alt="images">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END STICKY NAV -->
+
+            <!-- START PRODUCT COL 8 -->
+            <div class="col-md-12 col-lg-8 order-1 order-lg-2">
+                <div class="row">
+
+                    <!-- START LISTING HEADING -->
+                    <div class="col-12 product-listing-heading">
+                      <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <h1 class=" text-left" style="font-weight: 600; font-size: 30px;" class="roboto">{{curCategory}}</h1>
+                        <span class="p-input-icon-left">
+
+                          <input type="text" pInputText placeholder="Search" [(ngModel)]="keyword" style="margin-bottom: 0; padding: 5px 30px 5px 15px" (keydown.Enter)="getBookByFilter()"/>
+                          <i class="pi pi-search" style="left: 191px;"></i>
+                        </span>
+                        <div style="font-size: 15px;">{{20 * page + 1}}-{{20 * page + listCurBook.length}} trong {{curTotalRecord}}</div>
+                      </div>
+
+                        <div style="display: flex; justify-content: space-between;">
+                          <div *ngIf="isPriceRange" style="display: flex; margin-top: 10px;">
+                            <p style="font-weight: 600; color: orange; margin: 0 10px 0 0 ;">
+                              Range: {{priceRangeCopy[0] | formatVnd}} -  {{priceRangeCopy[1] | formatVnd}}
+                            </p>
+                            <button pButton pRipple type="button" icon="pi pi-filter" class="p-button-rounded p-button-text p-button-plain" style="border-radius: 50%;width: 25px;height: 25px;" (click)="clearRange()"></button>
+                          </div>
+                          <div></div>
+                          <div>
+                            <p-dropdown [options]="listOrder" [(ngModel)]="selectedOrder" optionLabel="name" optionValue="value" (onChange)="getBookByFilter()"></p-dropdown>
+                          </div>
+                        </div>
+
+                    </div>
+                    <!-- END LISTING HEADING -->
+
+                    <!-- START PRODUCT LISTING SECTION -->
+                    <div class="col-12 product-listing-products">
+
+                        <!-- START DISPLAY PRODUCT -->
+                        <div class="product-list row">
+
+                            <div class="col-12 col-md-6 col-lg-3 manage-color-hover-settting wow slideInUp" data-wow-delay=".2s" *ngFor="let item of listCurBook">
+                                <div class="product-item owl-theme product-listing-carousel ">
+                                    <div class="item p-item-img" style="aspect-ratio: 1/1;">
+                                            <img src="{{item.imageUrls}}" alt="images" style="object-fit: contain;">
+                                        <div class="text-center d-flex justify-content-center align-items-center">
+                                            <a class="listing-cart-icon" routerLink="/product-detail/{{item.id}}">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-item-detail">
+                                    <h4 class="text-center p-item-name"><a routerLink="/product-detail/{{item.id}}"> {{item.title}} </a></h4>
+                                    <p class="text-center p-item-price" >
+                                      <span style="color: gray; font-size: 11px; font-weight: 600; text-decoration: line-through; margin-right: 10px;">{{item.price | formatVnd}} </span>
+                                      <span style="color: green; font-weight: 600;">{{item.priceDiscount | formatVnd}} </span>
+
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                        <!-- END DISPLAY PRODUCT -->
+
+
+                    </div>
+                    <div style="text-align: center; width: 100%;">
+                      <p-paginator (onPageChange)="onPageChange($event)" [rows]="20" [totalRecords]="curTotalRecord"></p-paginator>
+                    </div>
+
+                    <!-- END PRODUCT LISTING SECTION -->
+                </div>
+            </div>
+            <!-- END PRODUCT COL 8 -->
+
+        </div>
+    </div>
+</div>
+<!--Product Line Up End-->
+
+<!--footer1 sec start-->
+<div class="footer">
+    <div class="container">
+        <div class="row footer-container">
+            <div class="col-sm-12 col-lg-4 f-sec1  text-center text-lg-left">
+                <h4 class="high-lighted-heading">About Us</h4>
+                <p>We take our mission of increasing our global access to quality education seriously. </p>
+                <a href="#">Read more</a>
+                <h4>Social Network</h4>
+                <div class="s-icons">
+                    <ul class="social-icons-simple">
+                        <li><a href="javascript:void(0)" class="facebook-bg-hvr"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                        <li><a href="javascript:void(0)" class="twitter-bg-hvr"><i class="fab fa-twitter" aria-hidden="true"></i></a> </li>
+                        <li><a href="javascript:void(0)" class="instagram-bg-hvr"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-5 f-sec2 ">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <h4 class="text-center text-md-left">Information</h4>
+                        <ul class="text-center text-md-left">
+                            <li><a href="javascript:void(0)">About Us</a></li>
+                            <li><a href="javascript:void(0)">Delivery Information</a></li>
+                            <li><a href="javascript:void(0)">Privacy Policy</a></li>
+                            <li><a href="javascript:void(0)">Terms & Condition</a></li>
+                            <li><a href="javascript:void(0)">FAQ</a></li>
+                            <li><a href="javascript:void(0)">Contact Us</a></li>
+                            <li><a href="product-listing.html">Products</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h4 class="text-center text-md-left">Account Info</h4>
+                        <ul class="text-center text-md-left">
+                            <li><a href="javascript:void(0)">My Account</a></li>
+                            <li><a href="javascript:void(0)">Login & Register</a></li>
+                            <li><a href="javascript:void(0)">Order History</a></li>
+                            <li><a href="javascript:void(0)">Shipping Info</a></li>
+                            <li><a href="#">Refund Policy</a></li>
+                            <li><a href="javascript:void(0)">Responsive Website</a></li>
+                            <li><a href="javascript:void(0)">Subscription</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-3 f-sec3  text-center text-lg-left">
+                <h4>Our Portfolio</h4>
+                <div class="foot-tag-list">
+                    <span>Classic</span>
+                    <span>Journal</span>
+                    <span>History</span>
+                    <span>Poetry</span>
+                    <span>Dictionary</span>
+                    <span>Shopping</span>
+                    <span>Fantasy</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 footer_notes">
+                <p class="whitecolor text-center w-100 wow fadeInDown">&copy; 2020 MegaOne. Made With Love by <a class="web-link" href="http://www.themesindustry.com/" target="_blank">Themesindustry</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--foo0ter1 sec end-->
+
+<!--START SEARCH AREA-->
+<div class="search-box-overlay">
+    <a><i class="fas fa-times cross-sign" id="close-window"></i></a>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 search-col">
+                <form action="javascript:void(0)">
+                    <div class="input-group search-box-form">
+                        <input type="text" class="form-control" placeholder="Search Here" aria-label="Search Here">
+                        <div class="input-group-prepend">
+                            <button class="input-group-text" type="submit" id="basic-addon1"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-12">
+                <hr>
+            </div>
+
+            <div class="col-12">
+                <h4 class="outlet-title text-center"> - Author - </h4>
+            </div>
+
+            <div class="col-12">
+                <div class="search-box-meida-items owl-carousel owl-theme">
+
+                    <div class="item">
+                        <div class="brand-search-box ml-auto mr-auto">
+                            <div class="media">
+                                <div class="brand-box-holder">
+                                    <a href="javascript:void(0)"> <img class="mr-3" src="assets/images/author1.jpg" alt="Generic placeholder image"></a>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="mt-0"><a href="javascript:void(0)"> Eva Smith</a></h5>
+                                    <p> Cras sit amet nibh libero.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="item">
+                        <div class="brand-search-box ml-auto mr-auto">
+                            <div class="media">
+                                <div class="brand-box-holder">
+                                    <a href="javascript:void(0)"> <img class="mr-3" src="assets/images/author2.jpg" alt="Generic placeholder image"></a>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="mt-0"><a href="javascript:void(0)">Rosa Parks</a></h5>
+                                    <p> Cras sit amet nibh libero.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="item">
+                        <div class="brand-search-box ml-auto mr-auto">
+                            <div class="media">
+                                <div class="brand-box-holder">
+                                    <a href="javascript:void(0)"> <img class="mr-3" src="assets/images/author3.jpg" alt="Generic placeholder image"></a>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="mt-0"><a href="javascript:void(0)">Alan Yang</a></h5>
+                                    <p> Cras sit amet nibh libero.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="item">
+                        <div class="brand-search-box ml-auto mr-auto">
+                            <div class="media">
+                                <div class="brand-box-holder">
+                                    <a href="javascript:void(0)"><img class="mr-3" src="assets/images/author4.jpg" alt="Generic placeholder image"></a>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="mt-0"><a href="javascript:void(0)">Kam John</a></h5>
+                                    <p> Cras sit amet nibh libero.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--END SEARCH AREA -->

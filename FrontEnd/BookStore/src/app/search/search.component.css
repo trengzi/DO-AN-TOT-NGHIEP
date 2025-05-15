@@ -1,0 +1,24 @@
+.filter-heading-set {
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 28px
+}
+.roboto{
+  font-family: "Roboto", sans-serif;
+  font-weight: 800;
+}
+
+.product-listing-products .product-list .p-item-detail .p-item-name {
+  margin-top: 10px;
+}
+
+.product-listing-products .product-list .p-item-detail .p-item-name{
+  font-size: 15px;
+}
+.manage-color-hover-settting:hover .listing-cart-icon{
+  opacity: 1;
+}
+
+::ng-deep .p-dropdown-label{
+  line-height: 5px;
+}

@@ -1,0 +1,37 @@
+<div style="margin-top: 20px; padding: 40px 0;">
+  <div class="container">
+    <p style="font-size: 25px; font-weight: 700; text-align: center;">Sách yêu thích</p>
+
+    <div class="item--container" *ngIf="listSanPham.length == 0" style="text-align: center;">
+      <img src="https://cdn-icons-png.flaticon.com/512/11329/11329060.png" alt="" style="width: 300px; height: 300px;">
+      <h4 class="fontroboto">Chưa có sản phẩm yêu thích nào</h4>
+    </div>
+    <div class="item--container" *ngIf="listSanPham.length > 0">
+
+
+      <div class="item" *ngFor="let item of listSanPham">
+        <div class="item_c"  style="display: flex; justify-content: space-between; width: 100%; position: relative;">
+          <div class="div1" routerLink="/product-detail/{{item.id}}" style="width: 100%;">
+            <div class="cot1"><img [src]="item.imageUrls" alt=""></div>
+            <div class="cot2" style="width: 40%;">
+              <div class="item__name" style="margin-bottom: 20px;">{{item.title}}</div>
+              <p><p-rating [(ngModel)]="item.stars" [readonly]="true" [stars]="5" [cancel]="false" ></p-rating></p>
+              <div class="item__name" style="margin-bottom: 20px;">Code: {{item.code}}</div>
+                    <p class="gia" *ngIf="!item.priceDiscount">{{item.gia | formatVnd }}</p>
+                    <span *ngIf="item.priceDiscount" style="display: flex;">
+                      <p class="gia" style="color: gray; text-decoration: line-through; margin-right: 10px;">{{item.price | formatVnd }}</p>
+                      <p class="gia" >{{item.priceDiscount | formatVnd }}</p>
+                    </span>
+            </div>
+          </div>
+          <div class="div2">
+            <div class="cot4" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%);">
+              <button pButton type="button" class="p-button-raised p-button-rounded p-button-danger" style="border-radius: 25px; padding: 12px;" (click)="xoaSanPhamYeuThich(item.id)"><i class="fas fa-heart-crack"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

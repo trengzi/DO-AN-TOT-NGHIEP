@@ -1,0 +1,24 @@
+name: bookstore
+
+services:
+  bookstore-client:
+    image: bookstore-client
+    build:
+      context: ./BookStore
+      dockerfile: Dockerfile
+    ports:
+      - "9998:80"
+    networks:
+      - bookstore
+  bookstore-admin:
+    image: bookstore-admin
+    build:
+      context: ./Admin
+      dockerfile: Dockerfile
+    ports:
+      - "9999:80"
+    networks:
+      - bookstore
+networks:
+  bookstore:
+    driver: bridge

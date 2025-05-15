@@ -1,0 +1,49 @@
+.card-img-top {
+
+  object-fit: contain;
+  height: 316px !important;
+}
+
+.selectedButton{
+  background-color: #f7941d !important;
+  color: white !important;
+}
+
+.btnSelect{
+  background-color: #FFFFFF;
+    border: 1px solid #ECECEC;
+    color: #888888;
+    cursor: pointer;
+    font: 400 12px / 32px "Open Sans", sans-serif;
+    margin: 0 5px 10px 5px;
+    overflow: visible;
+    padding: 0 17px;
+    position: relative;
+    display: inline-block;
+    -webkit-transition: color .3s ease-in-out, background-color .3s ease-in-out, border-color .3s ease-in-out;
+    transition: color .3s ease-in-out, background-color .3s ease-in-out, border-color .3s ease-in-out;
+}
+
+.btnSelect:hover{
+  color: #ffffff;
+    background-color: #62ab00;
+}
+
+.sync-portfolio-carousel-setting {
+  max-width: 350px;
+  width: 100%;
+}
+
+.homer-banner .banner-description a:after {
+  content: "";
+  font-family: "Font Awesome 5 Free Solid";
+  display: inline-block;
+  width: 25px;
+  color: #f7941d;
+}
+
+@media screen and (max-width: 1199px) {
+  .sync-portfolio-carousel-setting {
+      max-width: 300px;
+  }
+}

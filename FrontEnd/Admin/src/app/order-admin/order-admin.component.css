@@ -1,0 +1,6 @@
+.body-wrapper-inner, .body-wrapper, .page-wrapper {
+    overflow: visible;
+  }
+  ::ng-deep .p-dropdown-panel {
+    z-index: 9999 !important;
+  }

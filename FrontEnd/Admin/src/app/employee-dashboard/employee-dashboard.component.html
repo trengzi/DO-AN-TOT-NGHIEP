@@ -1,0 +1,95 @@
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+
+      <!--  Header End -->
+      <div class="body-wrapper-inner">
+        <div style="font-size: 20px; font-weight: 700;">Báo cáo thống kê cho nhân viên</div>
+        <div style="display: flex; justify-content: space-around; margin-bottom: 30px;">
+          <div style="padding: 30px; border-radius: 10px; margin-top: 30px; background-color: rgb(190, 190, 255);" class="thongke1">
+            <div>
+              Tổng doanh thu cá nhân:
+
+            </div>
+            <span style="font-size: 20px;">{{doanhThuCaNhan | formatVnd}}</span>
+          </div>
+
+          <div style="padding: 30px; border-radius: 10px; margin-top: 30px; background-color: rgb(190, 190, 255);" class="thongke1">
+            <div>
+              Tổng doanh thu cá nhân trong tháng này:
+
+            </div>
+            <span style="font-size: 20px;">{{doanhThuCaNhanThang | formatVnd}}</span>
+          </div>
+
+          <div style="padding: 30px; border-radius: 10px; margin-top: 30px; background-color: rgb(190, 190, 255);" class="thongke1">
+            <div>
+              số lượng đơn hàng đã xử lý trong tháng:
+
+            </div>
+            <span style="font-size: 20px;">{{soLuongDonHangSolved}} / {{soLuongDonHang}}</span>
+          </div>
+        </div>
+
+
+        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+          <div class="mb-3 mb-sm-0">
+            <h5 class="card-title fw-semibold">Doanh thu theo tháng/năm</h5>
+          </div>
+          <div>
+            <p-dropdown [options]="list3year" [(ngModel)]="selectedYear" (onChange)="changeYear()"></p-dropdown>
+          </div>
+        </div>
+        <div style="margin-bottom: 60px;">
+          <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
+        </div>
+
+
+        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+          <div class="mb-3 mb-sm-0">
+            <h5 class="card-title fw-semibold">Trạng thái các đơn hàng trong tháng</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-5">
+            <p-chart type="pie" [data]="dataPie"  [style]="{'width': '40%'}"></p-chart>
+          </div>
+          <div class="col-lg-7">
+            <div style="margin-bottom: 30px; font-size: 18px; color: blueviolet; opacity: 0.6; height: 40px; display: flex; align-items: center; text-align: center;">
+              <div>
+                Công thức: hiệu suất =
+              </div>
+              <div style="margin-left: 10px;">
+                <div>
+                  tổng thời gian xử lý các đơn hàng
+                </div>
+                <div style="background-color: gray; width: 100%; height: 1px;">
+
+                </div>
+                <div>
+                  số lượng đơn hàng đã hoàn thành
+                </div>
+
+              </div>
+              <div style="margin-left: 20px;">x 100</div>
+            </div>
+            <div style="font-size: 18px; margin-bottom: 10px;">Hiệu xuất xử lý đơn hàng trong tháng hiện tại: <span>{{hieuSuat | number: '1.2-2'}} giờ / đơn</span></div>
+            <div style="display: flex; justify-content: space-between;">
+              <div style="font-size: 18px; margin-bottom: 20px;">Hiệu xuất xử lý đơn hàng theo tháng/năm: </div>
+              <div>
+                <p-dropdown [options]="list3year" [(ngModel)]="selectedYear2" (onChange)="changeYear2()"></p-dropdown>
+              </div>
+            </div>
+
+            <p-chart type="line" [data]="basicData2" [options]="basicOptions"></p-chart>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</div>

@@ -1,0 +1,446 @@
+<a class="scroll-top-arrow" href="javascript:void(0);"><i class="fa fa-angle-up"></i></a>
+
+<!--LOADER-->
+
+<!--LOADER-->
+
+<!-- START HEADER NAVIGATION -->
+
+<!-- END HEADER NAVIGATION -->
+
+<!--slider sec strat-->
+<!-- <section id="slider-sec" class="slider-sec parallax" style="background: url('img/banner1.1.jpg');">
+</section> -->
+<!--slider sec end-->
+
+<!-- START HEADING SECTION -->
+<div class="about_content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="product-body">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb text-center text-lg-left">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Categories</a></li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="javascript:void(0)">Books</a></li>
+                            <li class="breadcrumb-item"><a class="active" href="javascript:void(0)">{{curBook.title}}</a></li>
+                        </ol>
+                    </nav>
+                    <div class="pro-detail-sec row">
+                        <div class="col-12">
+                            <h4 class="pro-heading text-center text-lg-left" style="">CHI TIẾT SẢN PHẨM</h4>
+                        </div>
+                    </div>
+                    <div class="row product-list product-detail">
+
+                        <div class="col-12 col-lg-6 product-detail-slider">
+                          <div style="text-align: center;">
+                            <img src="{{curImage}}" alt="" style="height: 360px; width: 360px; object-fit: contain;">
+                          </div>
+                          <p-carousel
+                          [value]="listBookImg"
+                          [numVisible]="3"
+                          [numScroll]="3"
+                          [circular]="false" >
+                              <ng-template let-product pTemplate="item">
+                                  <div class="border-1 surface-border border-round m-2 p-3">
+                                      <div class="mb-3">
+                                          <div class="relative mx-auto" (click)="changeCurImage(product)" style="cursor: pointer;">
+                                              <img
+                                                  src="{{product}}"
+                                                  class="w-full border-round" style="width: 100px; height: 100px; object-fit: contain;" />
+                                          </div>
+                                      </div>
+
+                                  </div>
+                              </ng-template>
+                          </p-carousel>
+                        </div>
+
+                        <div class="col-12 col-lg-6 text-center text-lg-left">
+                          <div style="display: flex; justify-content: space-between;">
+                            <div class="product-single-price">
+                              <p class=" p-item-price" style="margin-bottom: 15px;">
+                                <span style="color: green; font-weight: 700; font-size: 25px;">{{curBook.priceDiscount | formatVnd}} </span>
+                                <span style="color: gray; font-size: 14px; font-weight: 600; text-decoration: line-through; margin-left: 10px;">{{curBook.price | formatVnd}} </span>
+                              </p>
+
+                            </div>
+                            <div style=" margin-right: 20px; display: flex; margin-top: 2px; "  class="box-yeuthich" *ngIf="!isYeuThich">
+                              <i class="far fa-heart" style="font-size: 25px; font-family:'Font Awesome 6 Free'; cursor: pointer;"  (click)="themYeuThich()"></i>
+                            </div>
+                            <div style=" margin-right: 20px; display: flex; margin-top: 2px; "  class="box-yeuthich2" *ngIf="isYeuThich">
+                              <i class="fas fa-heart" style="font-size: 25px; font-family:'Font Awesome 6 Free'; color: rgb(237, 1, 1); cursor: pointer;"  (click)="boYeuThich()"></i>
+                            </div>
+                          </div>
+                            <p class="pro-description" style="font-size: 30px; font-weight: 600;">{{curBook.title}}</p>
+                            <div class="des">
+                              <div style="display: flex; justify-content: space-between;">
+                                <p style="font-size: 14px;">Tác giả: <span>{{curBook.tenTacGia}}</span></p>
+                                <p style="font-size: 14px;">Nhà cung cấp: <span>{{curBook.tenNhaCungCap}}</span></p>
+                              </div>
+
+                              <p style="font-size: 14px;">Nhà xuất bản: <span>{{curBook.tenNhaPhatHanh}}</span></p>
+                              <p style="font-size: 14px;">Số lượng còn: {{curBook.quantity}}</p>
+                              <div style="display: flex; align-items: center;">
+                                <p-rating [stars]="5" [cancel]="false" [(ngModel)]="curBook.stars" [readonly]="true" ></p-rating> <span style="font-weight: 500; margin-left: 5px; color: orange;">({{curBook.reviews.length}} lượt)</span>
+                                <div style="color: gray; margin: 0 10px;"> | </div>
+                                <p style="margin-bottom: 0;">Đã bán: {{curBook.soLuongDaBan}}</p>
+                              </div>
+
+                            </div>
+                            <div class="product-checklist">
+                              <ul>
+                                  <li style="font-family: 'roboto';"><i class="fas fa-check"></i> Cam kết hài lòng 100%</li>
+                                  <li style="font-family: 'roboto';"><i class="fas fa-check"></i> Sản phẩm chính hãng, đảm bảo chất lượng</li>
+                                  <li style="font-family: 'roboto';"><i class="fas fa-check"></i> Hỗ trợ đổi trả trong 14 ngày</li>
+                              </ul>
+                          </div>
+
+                            <div class="row product-quantity input_plus_mins no-gutters">
+
+                                <div class="qty col-12 col-lg-3 d-lg-flex  align-items-lg-center d-inline-block">
+                                    <span class="minus bg-dark" (click)="changeSL('-')"><i class="lni-minus" ></i></span>
+                                    <input type="number" class="count" name="qty" [(ngModel)]="soLuong">
+                                    <span class="plus bg-dark" (click)="changeSL('+')"><i class="lni-plus" ></i></span>
+                                </div>
+                                <div class="col-12 col-lg-9">
+                                    <button class="btn green-color-yellow-gradient-btn" (click)="addToCart()">Thêm vào giỏ hàng</button>
+                                </div>
+                            </div>
+
+
+                            <div class="dropdown-divider"></div>
+
+                            <div class="product-tags-list">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><p class="d-inline">SKU: <span>00012</span></p></li>
+                                        <li class="breadcrumb-item"><span class="d-inline">Danh mục: <a href="javascript:void(0)">{{curBook.tenDanhMuc}}</a></span></li>
+                                    </ol>
+                                </nav>
+                            </div>
+
+                            <div class="share-product-details">
+                                <ul class="share-product-icons">
+                                    <li><p>Share Link:</p></li>
+                                    <li><a href="javascript:void(0)" class="facebook-bg-hvr"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                                    <li><a href="javascript:void(0)" class="twitter-bg-hvr"><i class="fab fa-twitter" aria-hidden="true"></i></a> </li>
+                                    <li><a href="javascript:void(0)" class="linkedin-bg-hvr"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
+                                    <li><a href="javascript:void(0)" class="instagram-bg-hvr"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+                <div class="col-12 mt-4 mb-4">
+                  <div class="row no-gutters product-all-details">
+
+                      <ul class="col-12 nav nav-tabs" id="myTab" role="tablist">
+                          <li class="col-4 nav-item">
+                              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mô tả sản phẩm</a>
+                          </li>
+                          <li class="col-4 nav-item">
+                              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Thông tin mở rộng</a>
+                          </li>
+                          <li class="col-4 nav-item">
+                              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Đánh giá của khách hàng</a>
+                          </li>
+                      </ul>
+                      <div class="col-12 tab-content" id="myTabContent" style="max-height: 1800px; overflow-y: auto;">
+                          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                              <div [innerHTML]="curBook.description">
+
+                              </div>
+                          </div>
+                          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                              <div class="row">
+                                  <div class="col-12">
+                                      <table class="table table-striped">
+                                          <tbody>
+                                          <tr>
+                                              <th scope="row">1</th>
+                                              <td scope="col">Mã hàng:</td>
+                                              <td scope="col">{{curBook.code}}</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">2</th>
+                                              <td>Tên Nhà Cung Cấp:</td>
+                                              <td>{{curBook.tenNhaCungCap}}</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">3</th>
+                                              <td>Tác giả:</td>
+                                              <td>{{curBook.tenTacGia}}</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">4</th>
+                                              <td>Nhà xuất bản:</td>
+                                              <td>{{curBook.tenNhaPhatHanh}}</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">5</th>
+                                              <td>Trọng lượng (gr):</td>
+                                              <td>{{curBook.weight}}</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">6</th>
+                                              <td>Kích Thước Bao Bì:</td>
+                                              <td>{{curBook.size}} cm</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">7</th>
+                                              <td>Số trang:</td>
+                                              <td>{{curBook.pageNumber}}</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">8</th>
+                                              <td>Hình thức:</td>
+                                              <td>{{curBook.coverType}}</td>
+                                          </tr>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="tab-pane fade reviews" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+                              <div class="media" *ngFor="let item of listReview">
+                                  <div class=" no-gutter" style="width: 100%;">
+                                      <div class="col-12p-0">
+                                          <div class="media-body">
+                                              <span class="text-center text-lg-left d-block" style="color: gray; font-size: 14px;">{{item.created | date: 'dd/MM/yyyy'}}</span>
+                                              <h5 class="mb-2 text-center text-lg-left" style="font-family: 'roboto';">{{item.fullName}}</h5>
+                                              <p-rating [stars]="5" [cancel]="false" [(ngModel)]="item.stars" [readonly]="true" ></p-rating>
+                                              <p class="text-center text-lg-left" style="text-align: justify !important;">{{item.comment}}</p>
+                                          </div>
+                                      </div>
+
+                                  </div>
+                              </div>
+
+
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--START LATEST ARRIVALS-->
+    <div class="lastest_arrivals">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <h1>Sản phẩm cùng thể loại</h1>
+                </div>
+
+                <div class="col-12">
+                  <p-carousel [value]="listCategoryBook" styleClass="custom-carousel" [numVisible]="5" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+
+                    <ng-template let-item pTemplate="item">
+
+                      <div class="lastest_arrival_items item" (click)="changeBook(item.id)">
+                        <div class="card">
+                            <div class="image-holder">
+                                <a  routerLink="/product-detail/{{item.id}}" data-fancybox="lastest_product-a" data-title="Shirt Name">
+                                    <img src="{{item.imageUrls}}" class="card-img-top" alt="Lastest Arrivals 1" style="width: 180px; height: 180px; object-fit: contain;">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <h5 class="card-title">{{item.title}}</h5>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <p class="card-text" style="font-weight: 600; color: green;"> {{item.priceDiscount != null ? (item.priceDiscount | formatVnd) : item.price | formatVnd}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    </ng-template>
+                  </p-carousel>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END LATEST ARRIVALS-->
+
+</div>
+<!-- END HEADING SECTION -->
+
+<!--footer1 sec start-->
+<div class="footer">
+    <div class="container">
+        <div class="row footer-container">
+            <div class="col-sm-12 col-lg-4 f-sec1  text-center text-lg-left">
+                <h4 class="high-lighted-heading">About Us</h4>
+                <p>We take our mission of increasing our global access to quality education seriously. </p>
+                <a href="#">Read more</a>
+                <h4>Social Network</h4>
+                <div class="s-icons">
+                    <ul class="social-icons-simple">
+                        <li><a href="javascript:void(0)" class="facebook-bg-hvr"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                        <li><a href="javascript:void(0)" class="twitter-bg-hvr"><i class="fab fa-twitter" aria-hidden="true"></i></a> </li>
+                        <li><a href="javascript:void(0)" class="instagram-bg-hvr"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-5 f-sec2 ">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <h4 class="text-center text-md-left">Information</h4>
+                        <ul class="text-center text-md-left">
+                            <li><a href="javascript:void(0)">About Us</a></li>
+                            <li><a href="javascript:void(0)">Delivery Information</a></li>
+                            <li><a href="javascript:void(0)">Privacy Policy</a></li>
+                            <li><a href="javascript:void(0)">Terms & Condition</a></li>
+                            <li><a href="javascript:void(0)">FAQ</a></li>
+                            <li><a href="javascript:void(0)">Contact Us</a></li>
+                            <li><a href="product-listing.html">Products</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h4 class="text-center text-md-left">Account Info</h4>
+                        <ul class="text-center text-md-left">
+                            <li><a href="javascript:void(0)">My Account</a></li>
+                            <li><a href="javascript:void(0)">Login & Register</a></li>
+                            <li><a href="javascript:void(0)">Order History</a></li>
+                            <li><a href="javascript:void(0)">Shipping Info</a></li>
+                            <li><a href="#">Refund Policy</a></li>
+                            <li><a href="javascript:void(0)">Responsive Website</a></li>
+                            <li><a href="javascript:void(0)">Subscription</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-3 f-sec3  text-center text-lg-left">
+                <h4>Our Portfolio</h4>
+                <div class="foot-tag-list">
+                    <span>Classic</span>
+                    <span>Journal</span>
+                    <span>History</span>
+                    <span>Poetry</span>
+                    <span>Dictionary</span>
+                    <span>Shopping</span>
+                    <span>Fantasy</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 footer_notes">
+                <p class="whitecolor text-center w-100 wow fadeInDown">&copy; 2019 MegaOne. Made With Love by <a class="web-link" href="http://www.themesindustry.com/" target="_blank">Themesindustry</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--foo0ter1 sec end-->
+
+<!--START SEARCH AREA-->
+<div class="search-box-overlay">
+    <a><i class="fas fa-times cross-sign" id="close-window"></i></a>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 search-col">
+                <form action="javascript:void(0)">
+                    <div class="input-group search-box-form">
+                        <input type="text" class="form-control" placeholder="Search Here" aria-label="Search Here">
+                        <div class="input-group-prepend">
+                            <button class="input-group-text" type="submit" id="basic-addon1"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-12">
+                <hr>
+            </div>
+
+            <div class="col-12">
+                <h4 class="outlet-title text-center"> - Author - </h4>
+            </div>
+
+            <div class="col-12">
+                <div class="search-box-meida-items owl-carousel owl-theme">
+
+                    <div class="item">
+                        <div class="brand-search-box ml-auto mr-auto">
+                            <div class="media">
+                                <div class="brand-box-holder">
+                                    <a href="javascript:void(0)"> <img class="mr-3" src="assets/images/author1.jpg" alt="Generic placeholder image"></a>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="mt-0"><a href="javascript:void(0)"> Eva Smith</a></h5>
+                                    <p> Cras sit amet nibh libero.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="item">
+                        <div class="brand-search-box ml-auto mr-auto">
+                            <div class="media">
+                                <div class="brand-box-holder">
+                                    <a href="javascript:void(0)"> <img class="mr-3" src="assets/images/author2.jpg" alt="Generic placeholder image"></a>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="mt-0"><a href="javascript:void(0)">Rosa Parks</a></h5>
+                                    <p> Cras sit amet nibh libero.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="item">
+                        <div class="brand-search-box ml-auto mr-auto">
+                            <div class="media">
+                                <div class="brand-box-holder">
+                                    <a href="javascript:void(0)"> <img class="mr-3" src="assets/images/author3.jpg" alt="Generic placeholder image"></a>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="mt-0"><a href="javascript:void(0)">Alan Yang</a></h5>
+                                    <p> Cras sit amet nibh libero.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="item">
+                        <div class="brand-search-box ml-auto mr-auto">
+                            <div class="media">
+                                <div class="brand-box-holder">
+                                    <a href="javascript:void(0)"><img class="mr-3" src="assets/images/author4.jpg" alt="Generic placeholder image"></a>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="mt-0"><a href="javascript:void(0)">Kam John</a></h5>
+                                    <p> Cras sit amet nibh libero.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<p-toast></p-toast>
+<!--END SEARCH AREA -->
+
+

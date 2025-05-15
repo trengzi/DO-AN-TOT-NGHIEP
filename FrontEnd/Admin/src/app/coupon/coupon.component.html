@@ -1,0 +1,156 @@
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+data-sidebar-position="fixed" data-header-position="fixed">
+  <div class="body-wrapper">
+    <!--  Header Start -->
+
+    <!--  Header End -->
+    <div class="body-wrapper-inner">
+      <p-table [value]="listCoupon" [tableStyle]="{'min-width': '60rem'}">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between" style="display: flex; justify-content: space-between;">
+                Mã giảm giá
+                <button pButton pRipple type="button" label="Thêm mới" class="p-button-info p-button-text" style="padding: 8px; border-radius: 5px; font-weight: 800;" (click)="showThemMoi()"></button>
+                <p-button icon="pi pi-refresh" (onClick)="getAll()"></p-button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Code</th>
+                <th>Giảm</th>
+                <th>Giá trị từ</th>
+                <th>Giá trị đến</th>
+                <th>Số lượng</th>
+                <th>Đã dùng</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.code}}</td>
+                <td>{{product.discountPercent}} %</td>
+                <td>{{product.validFrom |  date:'dd/MM/yyyy'}}</td>
+                <td>{{product.validUntil | date:'dd/MM/yyyy'}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.used}}</td>
+                <td>
+                  <button pButton pRipple type="button" class="p-button-info p-button-text" style="padding: 8px; border-radius: 5px;" (click)="this.showSua(product.id)"><i class=" pi pi-pencil"></i></button>
+                  <button pButton pRipple type="button" class="p-button-danger p-button-text" style="padding: 8px; border-radius: 5px;" (click)="deleteBook(product.id)"><i class=" pi pi-trash"></i></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+
+            </div>
+        </ng-template>
+      </p-table>
+      <div style="text-align: center; width: 100%;">
+        <p-paginator  [rows]="20" [totalRecords]="listCoupon.length"></p-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Thêm mới/Sửa mã giảm giá" [(visible)]="showForm" maximizable="true" [style]="{width: '800px', maxHeight: 'unset', minHeight: '700px'}" [draggable]="false" [modal]="true">
+
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">code:</span>
+        </div>
+        <div style="width: 100%;">
+          <input type="text" pInputText [(ngModel)]="body.code" style="padding: 5px 10px; width: 100%;"/>
+        </div>
+
+      </div>
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Phần trăm giảm:</span>
+        </div>
+        <div style="width: 100%;">
+          <input type="text" pInputText [(ngModel)]="body.discountPercent" style="padding: 5px 10px; width: 100%;"/>
+        </div>
+
+      </div>
+
+
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Giá trị đơn hàng tối thiểu:</span>
+        </div>
+        <div style="width: 100%;">
+          <input type="text" pInputText [(ngModel)]="body.minOrder" style="padding: 5px 10px; width: 100%;"/>
+        </div>
+
+      </div>
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Trạng thái:</span>
+        </div>
+        <div style="width: 100%;">
+          <p-dropdown [options]="statusMa" [(ngModel)]="body.status"></p-dropdown>
+        </div>
+
+      </div>
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Số lượng:</span>
+        </div>
+        <div style="width: 100%;">
+          <input type="text" pInputText [(ngModel)]="body.quantity" style="padding: 5px 10px; width: 100%;"/>
+        </div>
+
+      </div>
+
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Mô tả:</span>
+        </div>
+        <div style="width: 100%;">
+          <textarea type="text" pInputTextarea [(ngModel)]="body.description" style="padding: 5px 10px; width: 100%;"></textarea>
+        </div>
+
+      </div>
+
+      <div class="itemDes" style="margin-top: 150px;">
+        <div>
+          <span style="margin-right: 20px;">Giá trị từ ngày:</span>
+        </div>
+        <div style="width: 100%;">
+          <p-calendar [(ngModel)]="body.validFrom" [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy"></p-calendar>
+        </div>
+
+      </div>
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Giá trị đến ngày:</span>
+        </div>
+        <div style="width: 100%;">
+          <p-calendar [(ngModel)]="body.validUntil" [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy"></p-calendar>
+        </div>
+
+      </div>
+
+
+    <div style="text-align: center;" *ngIf="showUpdate == false">
+      <button pButton pRipple type="button" label="Thêm" class="p-button-info p-button-text" style="padding: 8px; border-radius: 5px; font-weight: 800; margin-right: 20px;" (click)="addBook()"></button>
+    </div>
+    <div style="text-align: center;" *ngIf="showUpdate">
+      <button pButton pRipple type="button" label="Sửa" class="p-button-info p-button-text" style="padding: 8px; border-radius: 5px; font-weight: 800; margin-right: 20px;" (click)="updateItem()"></button>
+    </div>
+  </div>
+  </div>
+
+
+
+</p-dialog>
+
+<p-confirmDialog header="Xóa bản ghi" icon="fas fa-circle-info"></p-confirmDialog>
+<p-toast></p-toast>

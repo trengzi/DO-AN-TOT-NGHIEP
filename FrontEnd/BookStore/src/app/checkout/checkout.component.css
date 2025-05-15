@@ -1,0 +1,111 @@
+.cotthongtin div{
+  margin: 5px 0;
+}
+.cotanh img{
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+.cotanh{
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+.hang{
+  margin-bottom: 20px;
+}
+.item{
+  margin: 10px 0;
+}
+.giam__container{
+  background-color: #f7f7f7;
+}
+.giam{
+  padding: 10px 0;
+}
+.ma_item{
+  padding: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: scroll;
+}
+.list_ma{
+  padding: 0;
+  border-bottom: solid 1px lightgray;
+  overflow-y: scroll;
+}
+.ma_item:hover{
+  box-shadow: 0 4px 4px rgba(114, 80, 201, 0.1);
+  cursor: pointer;
+  background-color: azure;
+  transition: 0.3;
+}
+.ma_item label:hover{
+  cursor: pointer;
+}
+.ma_item img{
+  width: 40px;
+  height: 40px;
+}
+.tong_dong{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px 0 10px;
+}
+#float-input:focus .labelFocus{
+  top: -5px;
+}
+.item__diachi{
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+}
+
+span div{
+  width: 20px;
+  height: 20px;
+  border: solid lightgray 1px;
+  border-radius: 50%;
+  margin-top: 0px !important;
+  margin-left: 20px;
+}
+::ng-deep .p-dialog-header{
+  padding: 12px;
+}
+
+::ng-deep #float-input{
+  width: 100%;
+}
+
+::ng-deep .p-float-label{
+  width: 100%;
+}
+
+::ng-deep .p-progressbar{
+  height: 12px !important;
+}
+
+::ng-deep .p-progressbar-label div{
+  font-size: 9px;
+}
+.prb .p-element{
+  width: 100%;
+}
+
+
+
+:host ::ng-deep .p-dialog-footer .p-button{
+  border-radius: 25px;
+  font-size: 14px;
+  margin-left: 20px;
+  padding: 8px 14px;
+}
+:host ::ng-deep .p-dialog-footer{
+  padding-bottom:  10px;
+  padding-right: 20px;
+}
+:host ::ng-deep .p-progressbar{
+  height: 2px;
+}
+

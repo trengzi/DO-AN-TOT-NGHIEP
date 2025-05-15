@@ -1,0 +1,26 @@
+::ng-deep h2{
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+
+::ng-deep span{
+  width: 100%;
+}
+
+::ng-deep .aligncenter{
+  text-align: center !important;
+}
+
+::ng-deep h3{
+  font-size: 25px;
+  margin-bottom: 10px;
+  font-family: 'roboto';
+}
+
+::ng-deep h4{
+  font-family: 'roboto';
+}
+
+::ng-deep p{
+  text-align: justify;
+}

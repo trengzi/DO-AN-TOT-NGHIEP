@@ -1,0 +1,331 @@
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+  data-sidebar-position="fixed" data-header-position="fixed">
+  <div class="body-wrapper">
+    <!--  Header Start -->
+
+    <!--  Header End -->
+    <div class="body-wrapper-inner">
+      <p-table [value]="listUser" [tableStyle]="{'min-width': '60rem'}">
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between"
+            style="display: flex; justify-content: space-between;">
+            Người dùng
+            <p-button icon="pi pi-refresh" (onClick)="getAll()"></p-button>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Ngày sinh</th>
+            <th>Địa chỉ</th>
+            <th>Số điện thoại</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr>
+            <td>{{product.fullName}}</td>
+            <td>{{product.email}}</td>
+            <td>{{product.dateOfBirth | date:'dd/MM/yyyy'}}</td>
+            <td>{{product.address}}</td>
+            <td>{{product.phoneNumber}}</td>
+            <td>{{product.status}}</td>
+            <!-- <td style="width: 100px;">
+              <p-dropdown [options]="roles" [(ngModel)]="product.role" optionLabel="name" optionValue="id"
+                placeholder="Chọn vai trò" styleClass="w-full" [style]="{'width': '150px'}">
+              </p-dropdown>
+            </td> -->
+            <td style="width: 180px;">
+              <!-- <button pButton pRipple type="button" class="p-button-success p-button-text"
+                style="padding: 8px; border-radius: 5px;" (click)="updateUserRole(product)">
+                <i class="pi pi-check"></i>
+              </button> -->
+
+              <!-- Các nút hiện tại -->
+              <button pButton pRipple type="button" class="p-button-info p-button-text"
+                style="padding: 8px; border-radius: 5px;" (click)="showUser(product.id)">
+                <i class="pi pi-eye"></i>
+              </button>
+              <button pButton pRipple type="button" class="p-button-danger p-button-text"
+                style="padding: 8px; border-radius: 5px;" (click)="lockAccount(product.email)"
+                *ngIf="product.status == 'Hoạt động' && roleLogin != 3">
+                <i class="fa-solid fa-lock" style="font-weight: 900;"></i>
+              </button>
+              <button pButton pRipple type="button" class="p-button-danger p-button-text"
+                style="padding: 8px; border-radius: 5px;" (click)="unlockAccount(product.email)"
+                *ngIf="product.status == 'Đang khóa' && roleLogin != 3">
+                <i class="fa-solid fa-lock-open" style="color: green; font-weight: 900;"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="flex align-items-center justify-content-between">
+
+          </div>
+        </ng-template>
+      </p-table>
+      <div style="text-align: center; width: 100%;">
+        <p-paginator [rows]="20" [totalRecords]="listUser.length"></p-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Thông tin người dùng" [(visible)]="showForm" maximizable="true"
+  [style]="{width: '100%', maxHeight: '100vh'}" [draggable]="false" [modal]="true">
+
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Tên:</span>
+        </div>
+        <div style="width: 100%;">
+          <input type="text" pInputText [(ngModel)]="body.fullName" style="padding: 5px 10px; width: 100%;" disabled />
+        </div>
+
+      </div>
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Email(Tên đăng nhập):</span>
+        </div>
+        <div style="width: 100%;">
+          <input type="text" pInputText [(ngModel)]="body.email" style="padding: 5px 10px; width: 100%;" disabled />
+        </div>
+
+      </div>
+
+
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Địa chỉ:</span>
+        </div>
+        <div style="width: 100%;">
+          <input type="text" pInputText [(ngModel)]="body.address" style="padding: 5px 10px; width: 100%;" disabled />
+        </div>
+
+      </div>
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Số điện thoại:</span>
+        </div>
+        <div style="width: 100%;">
+          <input type="text" pInputText [(ngModel)]="body.phoneNumber" style="padding: 5px 10px; width: 100%;"
+            disabled />
+        </div>
+
+      </div>
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Ngày sinh:</span>
+        </div>
+        <div style="width: 100%;">
+          <p-calendar [(ngModel)]="body.dateOfBirth" [showIcon]="true" inputId="icon" disabled></p-calendar>
+        </div>
+
+      </div>
+
+      <div>
+        Đơn hàng đã mua
+      </div>
+      <div>
+        <div class="item" style="justify-content: space-between;" *ngFor="let item of listCurOrder">
+          <div style="display: flex;">
+            <div style="display: flex; align-items: center; width: 100px; justify-content: center ;">
+              <i class="fa-solid fa-ticket" style="font-size: 45px; color: rgb(234, 170, 74);"></i>
+            </div>
+            <div class="item_col" style="max-width: 200px;">
+              <div>Mã đơn</div>
+              <div>{{item.code}}</div>
+            </div>
+            <div class="item_col">
+              <div>Ngày tạo</div>
+              <div>{{item.created | date: 'dd/MM/yyyy HH:mm'}}</div>
+            </div>
+            <div class="item_col">
+              <div>Trạng thái</div>
+              <div *ngIf="item.status != TrangThaiDonHang.DaHuy">{{item.status}}</div>
+              <div *ngIf="item.status == TrangThaiDonHang.DaHuy" style="font-weight: 600; color: red;">{{item.status}}
+              </div>
+            </div>
+            <div class="item_col">
+              <div>Thành tiền</div>
+              <div>{{item.totalPrice | formatVnd}}</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; width: 150px; text-align: center;">
+            <button pButton type="button" class="p-button-raised p-button-rounded p-button-information"
+              style="border-radius: 25px; padding: 6px 8px; width: 100%;justify-content: center; font-size: 14px; "
+              (click)="viewOrderDetail(item)">Xem chi tiết</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</p-dialog>
+<p-dialog header="Thông tin đơn hàng" [(visible)]="orderDetailVisible" maximizable="true"
+  [style]="{width: '100%', maxHeight: '100vh'}" [draggable]="false" [modal]="true">
+  <ng-container *ngIf="selectedOrder">
+  <div>
+    <div class="chitietdonhang_row1_con">
+      <div class="con_left" style="margin: 10px 0 !important;">
+        <h4>Chi tiết đơn hàng: {{selectedOrder.code}}</h4>
+        <p>Trạng thái đơn hàng:
+          <span style="color: rgb(7, 7, 98); font-weight: bold;"
+            *ngIf="selectedOrder.status == TrangThaiDonHang.ChoXacNhan">{{selectedOrder.status}} <i
+              class="fas fa-hourglass-half"></i></span>
+          <span style="color: green; font-weight: bold;" *ngIf="selectedOrder.status == TrangThaiDonHang.DangChuanBiHang"> <i
+              class="fas fa-truck-moving"></i> {{selectedOrder.status}}</span>
+          <span style="color: green; font-weight: bold;" *ngIf="selectedOrder.status == TrangThaiDonHang.DangGiaoHang"> <i
+              class="fas fa-truck-moving"></i> {{selectedOrder.status}}</span>
+          <span style="color: green; font-weight: bold;"
+            *ngIf="selectedOrder.status == TrangThaiDonHang.GiaoHangThanhCong">{{selectedOrder.status}} <i
+              class="far fa-circle-check"></i></span>
+          <span style="color: red; font-weight: bold;"
+            *ngIf="selectedOrder.status == TrangThaiDonHang.DaHuy">{{selectedOrder.status}}</span>
+        </p>
+      </div>
+      <div class="con_right">
+        <p>Ngày tạo: {{selectedOrder.created | date: "dd/MM/yyyy HH:mm"}}</p>
+      </div>
+    </div>
+    <div style="display: flex; padding: 10px 0;">
+      <div class="chitietdonhang_row2_con">
+        <h6 style="font-weight: 600; color: green;">Phương thức vận chuyển: </h6>
+        <div class="item_vc">
+          <div style="display: flex; align-items: center; padding: 5px; margin: 0 20px;">
+            <i class="fa-solid fa-truck-fast"></i>
+          </div>
+          <div *ngIf="selectedOrder.shippingMethod == PhuongThucVanChuyen.VanChuyenThuong">
+            <div>Vận chuyển thường: dự kiến 3-5 ngày</div>
+            <div>Phí vận chuyển: 25,000đ</div>
+          </div>
+          <div *ngIf="selectedOrder.shippingMethod == PhuongThucVanChuyen.VanChuyenSieuToc">
+            <div>Vận chuyển siêu tốc: nhận hàng trong ngày hoặc ngày mai</div>
+            <div>Phí vận chuyển: 40,000đ</div>
+          </div>
+        </div>
+      </div>
+      <div class="chitietdonhang_row2_con" style="padding: 0 20px; margin-left: 30px; border-left: solid gray 1px;">
+        <h6 style="font-weight: 600; color: green;">Mã giảm giá: </h6>
+        <div class="ma_item" style="display: flex;">
+          <div style="padding: 0 25px; display: flex; align-items: center;">
+            <i class="fa-solid fa-ticket" style="font-size: 19px;"></i>
+          </div>
+          <div>
+            <div>Mã: {{selectedOrder.coupon?.code}}</div>
+            <div>Lượng giảm: {{selectedOrder.coupon?.discountPercent}}%</div>
+          </div>
+        </div>
+      </div>
+      <div class="chitietdonhang_row2_con" style="padding: 0 20px; margin-left: 30px; border-left: solid gray 1px;">
+        <h6 style="font-weight: 600; color: green;">Người nhận:</h6>
+        <div>Số điện thoại: {{selectedOrder.phoneNumber}}</div>
+        <div>Tên: {{body.fullName}}</div>
+      </div>
+    </div>
+    <div style="display: flex; padding: 10px 0 20px 0; ">
+      <div class="chitietdonhang_row2_con"
+        style="width: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19); padding: 10px; border-radius: 10px;">
+        <h6 style="font-weight: 600; color: darkblue;">Địa chỉ: </h6>
+        <div class="item_vc">
+          <div style="padding: 0 25px; display: flex; align-items: center; margin: 10px 0;">
+            <i class="fa-solid fa-map-location-dot"></i>
+          </div>
+          <div>
+            {{selectedOrder.address}}
+          </div>
+        </div>
+      </div>
+      <div class="chitietdonhang_row2_con"
+        style="padding: 0 20px; margin-left: 30px; border-left: solid gray 1px; width: 50%;">
+        <h6 style="font-weight: 600; color: darkblue;">Thanh toán: </h6>
+        <div class="item_vc">
+          <div style="padding: 0 25px; display: flex; align-items: center; margin: 10px 0;">
+            <i class="fa-solid fa-credit-card"></i>
+          </div>
+          <div>
+            {{selectedOrder.paymentMethod}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ghichu">
+      <h6>Ghi chú: </h6>
+      <div>
+        <textarea pInputTextarea [cols]="95" [rows]="5" style="width: 100%;" disabled
+          [(ngModel)]="selectedOrder.note"></textarea>
+      </div>
+    </div>
+
+
+    <div class="row3">
+      <div
+        style="display: flex; padding: 10px 20px; border-bottom: solid 1px lightgray; background-color: rgb(235, 213, 255); font-weight: 700;"
+        class="tablesp">
+        <div style="width: 60%">
+          <p style="font-family: 'roboto';" >Thông tin sản phẩm</p>
+        </div>
+        <div style="width: 15%">
+          <p style="font-family: 'roboto';">Giá</p>
+        </div>
+        <div style="width: 10%">
+          <p style="font-family: 'roboto';">Số lượng</p>
+        </div>
+        <div style="width: 15%">
+          <p style="font-family: 'roboto';">Đơn giá</p>
+        </div>
+      </div>
+      <div class="list_item">
+        <div class="item" style="display: flex;" *ngFor="let item of listOrderProduct">
+
+          <div class="item__img" style="width: 15%; display: flex; align-items: center; justify-content: center;">
+            <img style="width: 70px; height: 80px;" [src]="item.imageUrls">
+          </div>
+          <div class="item__info" style="width: 45%; display: flex; align-items: center; margin-left: 10px;">
+            <div>
+              <div>{{item.title}}</div>
+              <div>Mã sách: {{item.code}}</div>
+            </div>
+          </div>
+          <div class="item__gia" style="width: 15%; display: flex; align-items: center;">
+            <p style="margin: 0;">{{item.unitPrice | formatVnd}}</p>
+          </div>
+          <div class="item__gia" style="width: 10%; display: flex; align-items: center;">
+            <p style="margin: 0;">{{item.quantity}}</p>
+          </div>
+          <div class="item__gia" style="width: 15%; display: flex; align-items: center;">
+            <p style="margin: 0;">{{item.unitPrice * item.quantity | formatVnd}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div>
+
+      <div style="display: flex; justify-content: right;">
+        <p class="tt_title" style="font-weight: 600; font-size: 18px;">Thanh Toán: </p>
+        <p class="tt_gia" style="font-size: 20px; color: red; font-weight: bold;">{{selectedOrder.totalPrice | formatVnd}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  </ng-container>
+</p-dialog>
+
+<p-confirmDialog header="Khóa/Mở khóa tài khoản" icon="fas fa-circle-info"></p-confirmDialog>
+
+<p-toast></p-toast>

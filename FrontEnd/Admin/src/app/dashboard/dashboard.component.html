@@ -1,0 +1,549 @@
+
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+
+      <!--  Header End -->
+      <div class="body-wrapper-inner">
+        <div class="container-fluid">
+          <!--  Row 1 -->
+            <div class="row">
+              <div style="display: flex; justify-content: space-around; margin-bottom: 30px;">
+                <div style="padding: 30px; border-radius: 10px; margin-top: 30px; background-color: rgb(190, 190, 255);" class="thongke1">
+                  <div>
+                    Doanh thu năm trước:
+
+                  </div>
+                  <span style="font-size: 20px;">{{thongKeCards.doanhThuNamTruoc| formatVnd}}</span>
+                </div>
+
+                <div style="padding: 30px; border-radius: 10px; margin-top: 30px; background-color: rgb(190, 190, 255);" class="thongke1">
+                  <div>
+                    Doanh thu trong năm hiện tại:
+
+                  </div>
+                  <span style="font-size: 20px;">{{thongKeCards.doanhThuNamHienTai| formatVnd}}</span>
+                </div>
+
+                <div style="padding: 30px; border-radius: 10px; margin-top: 30px; background-color: rgb(190, 190, 255);" class="thongke1">
+                  <div>
+                    Tăng trưởng theo tháng (so với tháng trước):
+
+                  </div>
+                  <span style="font-size: 20px;">{{thongKeCards.tangTruongTheoThang* 100 | number: '1.2-2'}} %</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-bottom: 20px;">
+              <h4 style="margin-bottom: 20px;">Quản lý sắp xếp theo doanh thu năm hiện tại:</h4>
+              <div style="display: flex; overflow: auto;">
+                <div style=" padding: 10px; width: 280px; min-width: 280px;" *ngFor="let item of topManager">
+                  <div class="card-employee">
+                    <div class="dau2">
+                      <div style="display: flex; align-items: center; margin-right: 10px;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3789/3789820.png" alt="" style="width: 100%;">
+                      </div>
+                    </div>
+                    <div class="dau10">
+                      <div>{{item.fullName}}</div>
+                      <div>Doanh thu: {{item.doanhThu | formatVnd}}</div>
+                      <div>Số lượng nhân viên: {{item.soNhanVien}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row" style="margin-bottom: 20px;">
+              <h4 style="margin-bottom: 20px;">Quản lý sắp xếp theo doanh thu tháng hiện tại:</h4>
+              <div style=" overflow: auto; display: flex;">
+                <div style=" padding: 10px; width: 280px; min-width: 280px;" *ngFor="let item of topManagerMonth">
+                  <div class="card-employee" style="width: fit-content;">
+                    <div class="dau2">
+                      <div style="display: flex; align-items: center; margin-right: 10px;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3789/3789820.png" alt="" style="width: 100%;">
+                      </div>
+                    </div>
+                    <div class="dau10">
+                      <div>{{item.fullName}}</div>
+                      <div>Doanh thu: {{item.doanhThu | formatVnd}}</div>
+                      <div>Số lượng nhân viên: {{item.soNhanVien}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <div class="row">
+            <div class="col-lg-8 d-flex align-items-strech">
+              <div class="card w-100">
+                <div class="card-body">
+                  <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                    <div class="mb-3 mb-sm-0">
+                      <h5 class="card-title fw-semibold">Doanh thu theo tháng/năm</h5>
+                    </div>
+                    <div>
+                      <p-dropdown [options]="list3year" [(ngModel)]="selectedYear" (onChange)="changeYear()"></p-dropdown>
+                    </div>
+                  </div>
+                  <div id="sales-profit">
+                    <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card bg-danger-subtle shadow-none w-100">
+                    <div class="card-body">
+                      <div class="d-flex mb-10 pb-1 justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-6">
+                          <div class="bg-danger px-3 py-2 rounded-pill d-inline-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-money-bill"></i>
+                          </div>
+                          <h6 class="mb-0 fs-4 fw-medium text-muted">
+                            Doanh Thu trong ngày
+                          </h6>
+                        </div>
+
+                      </div>
+                      <div class="row align-items-end justify-content-between pt-4">
+                        <div>
+                          <h2 class="mb-6 fs-8">{{doanhThuNgay | formatVnd}}</h2>
+                        </div>
+                        <div>
+                          <div id="total-followers" class="rounded-bars"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="card bg-secondary-subtle shadow-none w-100">
+                    <div class="card-body">
+                      <div class="d-flex mb-10 pb-1 justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-6">
+                          <div class=" bg-secondary px-3 py-2 rounded-pill d-inline-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-money-bill"></i>
+                          </div>
+                          <h6 class="mb-0 fs-4 fw-medium text-muted">
+                            Doanh thu trong tuần
+                          </h6>
+                        </div>
+                      </div>
+                      <div class="row align-items-center justify-content-between pt-4">
+                        <div class="col-5">
+                          <h2 class="mb-6 fs-8 text-nowrap">{{doanhThuTuan | formatVnd}}</h2>
+                        </div>
+                        <div class="col-5">
+                          <div id="total-income"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div style="display: flex; justify-content: space-around; margin-bottom: 30px;">
+              <div style="padding: 30px; border-radius: 10px; margin-top: 30px; background-color: rgb(190, 190, 255);" class="thongke1">
+                <div>
+                  Tỉ lệ hoàn thành đơn hàng:
+
+                </div>
+                <span style="font-size: 20px;">{{thongKeCards.tiLeHoanThanhDonHang * 100 | number: '1.2-2' }} %</span>
+              </div>
+
+              <div style="padding: 30px; border-radius: 10px; margin-top: 30px; background-color: rgb(190, 190, 255);" class="thongke1">
+                <div>
+                  Tỉ lệ hoàn thành đơn hàng trong tháng:
+
+                </div>
+                <span style="font-size: 20px;">{{thongKeCards.tiLeHoanThanhDonHangTrongThang* 100 | number: '1.2-2'}} %</span>
+              </div>
+              <div style="padding: 30px; border-radius: 10px; margin-top: 30px; background-color: rgb(190, 190, 255);" class="thongke1">
+                <div>
+                  Số đơn hàng xử lý trong tháng:
+
+                </div>
+                <span style="font-size: 20px;">{{thongKeCards.soDonHangXuLyTrongThang}}</span>
+              </div>
+              <div style="padding: 30px; border-radius: 10px; margin-top: 30px; background-color: rgb(190, 190, 255);" class="thongke1">
+                <div>
+                  Số đơn hàng xử lý trong năm:
+
+                </div>
+                <span style="font-size: 20px;">{{thongKeCards.soDonHangXuLyTrongNam}}</span>
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-8 d-flex align-items-stretch">
+              <div class="card w-100">
+                <div class=" pb-0" style=" padding: 10px 20px; margin-bottom: 40px">
+                  <h4 class="fs-4 mb-1 card-title">Đơn hàng theo tháng năm {{thisYear}}</h4>
+                </div>
+                <div>
+                  <p-chart type="bar" [data]="basicData2" [options]="basicOptions"></p-chart>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 d-flex align-items-stretch">
+              <div class="card w-100">
+                <div class="card-body">
+                  <div class="d-flex mb-3 justify-content-between align-items-center">
+                    <h4 class="mb-0 card-title">Tổng số người dùng</h4>
+                  </div>
+                    <div class="d-flex align-items-center justify-content-between py-10 border-bottom">
+                      <div class="d-flex align-items-center">
+                        <span style="font-size: 24px; margin-right: 10px; color: blueviolet;">{{sumUser}}</span>
+                        <i class="fa-solid fa-users"></i>
+                      </div>
+                    </div>
+
+                    <div class="d-flex mb-3 justify-content-between align-items-center" style="margin-top: 40px;">
+                      <h4 class="mb-0 card-title">Số tài khoản bị khóa</h4>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between py-10 border-bottom">
+                      <div class="d-flex align-items-center">
+                        <span style="font-size: 24px; margin-right: 10px; color: blueviolet;">{{sumUserLock}}</span>
+                        <i class="fa-solid fa-users"></i>
+                      </div>
+                    </div>
+
+                    <div class="d-flex mb-3 justify-content-between align-items-center" style="margin-top: 40px;">
+                      <h4 class="mb-0 card-title">Người dùng mới trong tháng</h4>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between py-10 border-bottom">
+                      <div class="d-flex align-items-center">
+                        <span style="font-size: 24px; margin-right: 10px; color: blueviolet;">{{sumUserMonth}}</span>
+                        <i class="fa-solid fa-users"></i>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+      <div class="row">
+        <div style="display: flex; justify-content: space-around; margin-bottom: 30px;">
+        <div style="padding: 30px; border-radius: 10px; margin-top: 30px; background-color: rgb(190, 190, 255);" class="thongke1">
+          <div>
+            Thời gian xử lý đơn hàng trung bình trong tháng:
+
+          </div>
+          <span style="font-size: 20px;">{{thongKeCards.thoiGianXuLyDonHangTrungBinhTrongThang | number: '1.2-2'}} giờ / đơn</span>
+        </div>
+
+        <div style="padding: 30px; border-radius: 10px; margin-top: 30px; background-color: rgb(190, 190, 255);" class="thongke1">
+          <div>
+            Tỉ lệ hủy đơn hàng trong tháng:
+
+          </div>
+          <span style="font-size: 20px;">{{thongKeCards.tiLeHuyDonTrongThang * 100 | number: '1.2-2'}} %</span>
+        </div>
+      </div>
+      </div>
+      <div class="row" style="margin-bottom: 20px;">
+        <h4 style="margin-bottom: 20px;">Top 3 nhân viên doanh thu cao trong tháng:</h4>
+        <div style="display: flex; justify-content: space-between;">
+          <div style=" padding: 10px;" *ngFor="let item of topEmployeesTrongThang">
+            <div class="card-employee">
+              <div class="dau2">
+                <div style="display: flex; align-items: center; margin-right: 10px;">
+                  <img src="https://cdn-icons-png.flaticon.com/512/3789/3789820.png" alt="" style="width: 100%;">
+                </div>
+              </div>
+              <div class="dau10">
+                <div>{{item.fullName}}</div>
+                <div>Doanh thu: {{item.totalRevenue | formatVnd}}</div>
+                <div>Thời gian xử lý trung bình: {{item.averageProcessingTime | number: '1.2-2'}} giờ / đơn</div>
+                <div>Số lượng đơn hàng: {{item.totalOrders}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom: 20px;">
+        <h4 style="margin-bottom: 20px;">Top 3 nhân viên doanh thu cao trong năm:</h4>
+        <div style="display: flex; justify-content: space-between;">
+          <div style=" padding: 10px;" *ngFor="let item of topEmployeesTrongNam">
+            <div class="card-employee">
+              <div class="dau2">
+                <div style="display: flex; align-items: center; margin-right: 10px;">
+                  <img src="https://cdn-icons-png.flaticon.com/512/3789/3789820.png" alt="" style="width: 100%;">
+                </div>
+              </div>
+              <div class="dau10">
+                <div>{{item.fullName}}</div>
+                <div>Doanh thu: {{item.totalRevenue | formatVnd}}</div>
+                <div>Thời gian xử lý trung bình: {{item.averageProcessingTime | number: '1.2-2'}} giờ / đơn</div>
+                <div>Số lượng đơn hàng: {{item.totalOrders}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="row" style="margin-bottom: 20px;">
+        <h4 style="margin-bottom: 20px;">Top 3 nhân viên xử lý nhiều đơn hàng trong tháng:</h4>
+        <div style="display: flex; justify-content: space-between;">
+          <div style=" padding: 10px;" *ngFor="let item of topEmployeeDonHangTrongThang">
+            <div class="card-employee">
+              <div class="dau2">
+                <div style="display: flex; align-items: center; margin-right: 10px;">
+                  <img src="https://cdn-icons-png.flaticon.com/512/3789/3789820.png" alt="" style="width: 100%;">
+                </div>
+              </div>
+              <div class="dau10">
+                <div>{{item.fullName}}</div>
+                <div>Doanh thu: {{item.totalRevenue | formatVnd}}</div>
+                <div>Thời gian xử lý trung bình: {{item.averageProcessingTime | number: '1.2-2'}} giờ / đơn</div>
+                <div>Số lượng đơn hàng: {{item.totalOrders}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom: 20px;">
+        <h4 style="margin-bottom: 20px;">Top 3 nhân viên xử lý nhiều đơn hàng trong năm:</h4>
+        <div style="display: flex; justify-content: space-between;">
+          <div style=" padding: 10px;" *ngFor="let item of topEmployeeDonHangTrongNam">
+            <div class="card-employee">
+              <div class="dau2">
+                <div style="display: flex; align-items: center; margin-right: 10px;">
+                  <img src="https://cdn-icons-png.flaticon.com/512/3789/3789820.png" alt="" style="width: 100%;">
+                </div>
+              </div>
+              <div class="dau10">
+                <div>{{item.fullName}}</div>
+                <div>Doanh thu: {{item.totalRevenue | formatVnd}}</div>
+                <div>Thời gian xử lý trung bình: {{item.averageProcessingTime | number: '1.2-2'}} giờ / đơn</div>
+                <div>Số lượng đơn hàng: {{item.totalOrders}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="row" style="margin-bottom: 20px;">
+        <h4 style="margin-bottom: 20px;"> 3 nhân viên xử lý ít đơn hàng trong tháng:</h4>
+        <div style="display: flex; justify-content: space-between;">
+          <div style=" padding: 10px;" *ngFor="let item of botEmployeeDonHangTrongThang">
+            <div class="card-employee">
+              <div class="dau2">
+                <div style="display: flex; align-items: center; margin-right: 10px;">
+                  <img src="https://cdn-icons-png.flaticon.com/512/3789/3789820.png" alt="" style="width: 100%;">
+                </div>
+              </div>
+              <div class="dau10">
+                <div>{{item.fullName}}</div>
+                <div>Doanh thu: {{item.totalRevenue | formatVnd}}</div>
+                <div>Thời gian xử lý trung bình: {{item.averageProcessingTime | number: '1.2-2'}} giờ / đơn</div>
+                <div>Số lượng đơn hàng: {{item.totalOrders}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom: 20px;">
+        <h4 style="margin-bottom: 20px;"> 3 nhân viên doanh thu thấp trong tháng:</h4>
+        <div style="display: flex; justify-content: space-between;">
+          <div style=" padding: 10px;" *ngFor="let item of botEmployeesTrongThang">
+            <div class="card-employee">
+              <div class="dau2">
+                <div style="display: flex; align-items: center; margin-right: 10px;">
+                  <img src="https://cdn-icons-png.flaticon.com/512/3789/3789820.png" alt="" style="width: 100%;">
+                </div>
+              </div>
+              <div class="dau10">
+                <div>{{item.fullName}}</div>
+                <div>Doanh thu: {{item.totalRevenue | formatVnd}}</div>
+                <div>Thời gian xử lý trung bình: {{item.averageProcessingTime | number: '1.2-2'}} giờ / đơn</div>
+                <div>Số lượng đơn hàng: {{item.totalOrders}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="row" style="margin-bottom: 20px;">
+        <h4 style="margin-bottom: 20px;">Top 5 khách hàng chi tiêu nhiều nhất:</h4>
+        <div style="display: flex; justify-content: space-between; overflow: auto;">
+          <div style=" padding: 10px; width: 350px; min-width: 350px;" *ngFor="let item of topKhachTrungThanh">
+            <div class="card-employee">
+              <div class="dau2">
+                <div style="display: flex; align-items: center; margin-right: 10px;">
+                  <img src="https://cdn-icons-png.flaticon.com/512/8750/8750754.png" alt="" style="width: 100%;">
+                </div>
+              </div>
+              <div class="dau10">
+                <div>{{item.fullName}}</div>
+                <div>Tổng số đơn hàng: {{item.totalOrders}}</div>
+                <div>Tổng chi tiêu: {{item.totalRevenue | formatVnd}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="row" style="margin-bottom: 20px;">
+        <h4 style="margin-bottom: 20px;">Top 3 khách hàng mua nhiều trong tháng:</h4>
+        <div style="display: flex; justify-content: space-between;">
+          <div style=" padding: 10px;" *ngFor="let item of topKhachMuaNhieuTrongThang">
+            <div class="card-employee">
+              <div class="dau2">
+                <div style="display: flex; align-items: center; margin-right: 10px;">
+                  <img src="https://cdn-icons-png.flaticon.com/512/8750/8750754.png" alt="" style="width: 100%;">
+                </div>
+              </div>
+              <div class="dau10">
+                <div>{{item.fullName}}</div>
+                <div>Tổng số đơn hàng: {{item.totalOrders}}</div>
+                <div>Tổng chi tiêu: {{item.totalRevenue | formatVnd}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+          <div class="row">
+            <h4 style="margin-bottom: 50px;">Sản phẩm bán chạy trong tháng</h4>
+            <p-carousel [value]="listSanPhamThang" styleClass="custom-carousel" [numVisible]="4" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+
+              <ng-template let-item pTemplate="item">
+
+                <div class="lastest_arrival_items item">
+                  <div class="card card-2">
+                      <div class="image-holder">
+                          <a  data-fancybox="lastest_product" data-title="Shirt Name">
+                              <img src="{{item.imageUrls}}" class="card-img-top" alt="Lastest Arrivals 1">
+                          </a>
+                      </div>
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="col-12 text-center">
+                                  <h6 class="card-title">{{item.title}}</h6>
+                              </div>
+                              <div class="col-12 text-center">
+                                <p class="card-title" style="font-size: 14px;">Code: {{item.code}}</p>
+                            </div>
+                              <div class="col-12 text-center">
+                                <p class="card-text" style="font-weight: 600;"> {{item.priceDiscount != null ? (item.priceDiscount | formatVnd) : item.price | formatVnd}}</p>
+                              </div>
+                              <div class="col-12 text-center">
+                                <p class="card-title" style="font-weight: 600; color: green;">Lượt bán: {{item.numberSell}}</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              </ng-template>
+            </p-carousel>
+          </div>
+
+          <div class="row">
+            <h4 style="margin-bottom: 50px;">Sản phẩm ít lượt mua trong tháng</h4>
+            <p-carousel [value]="listSanPhamItLuotMua" styleClass="custom-carousel" [numVisible]="4" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+
+              <ng-template let-item pTemplate="item">
+
+                <div class="lastest_arrival_items item">
+                  <div class="card  card-2">
+                      <div class="image-holder">
+                          <a  data-fancybox="lastest_product" data-title="Shirt Name">
+                              <img src="{{item.imageUrls}}" class="card-img-top" alt="Lastest Arrivals 1">
+                          </a>
+                      </div>
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="col-12 text-center">
+                                  <h6 class="card-title">{{item.title}}</h6>
+                              </div>
+                              <div class="col-12 text-center">
+                                <p class="card-title" style="font-size: 14px;">Code: {{item.code}}</p>
+                            </div>
+                              <div class="col-12 text-center">
+                                <p class="card-text" style="font-weight: 600;"> {{item.priceDiscount != null ? (item.priceDiscount | formatVnd) : item.price | formatVnd}}</p>
+                              </div>
+                              <div class="col-12 text-center">
+                                <p class="card-title" style="font-weight: 600; color: green;">Lượt bán: {{item.numberSell}}</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              </ng-template>
+            </p-carousel>
+          </div>
+
+
+          <div class="row">
+            <h4 style="margin-bottom: 50px;">Sản phẩm sắp hết hàng</h4>
+            <p-carousel [value]="listSanPhamSapHetHang" styleClass="custom-carousel" [numVisible]="4" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+
+              <ng-template let-item pTemplate="item">
+
+                <div class="lastest_arrival_items item">
+                  <div class="card  card-2">
+                      <div class="image-holder">
+                          <a  data-fancybox="lastest_product" data-title="Shirt Name">
+                              <img src="{{item.imageUrls}}" class="card-img-top" alt="Lastest Arrivals 1">
+                          </a>
+                      </div>
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="col-12 text-center">
+                                  <h6 class="card-title">{{item.title}}</h6>
+                              </div>
+                              <div class="col-12 text-center">
+                                <p class="card-title" style="font-size: 14px;">Code: {{item.code}}</p>
+                            </div>
+                              <div class="col-12 text-center">
+                                <p class="card-text" style="font-weight: 600;"> {{item.priceDiscount != null ? (item.priceDiscount | formatVnd) : item.price | formatVnd}}</p>
+                              </div>
+                              <div class="col-12 text-center">
+                                <p class="card-title" style="font-weight: 600; color: orange;">Số lượng còn lại: {{item.stock}}</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              </ng-template>
+            </p-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

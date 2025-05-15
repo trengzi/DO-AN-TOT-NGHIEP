@@ -1,0 +1,31 @@
+.sidebar-item .hide-menu{
+  font-weight: 600;
+}
+.sidebar-item a{
+  padding: 14px;
+}
+
+.con{
+  display: none;
+  position: absolute;
+  background-color: white;
+}
+
+.cha:hover .con{
+  display: block;
+
+}
+
+.cha{
+  position: relative;
+}
+.con {
+  left: -40px !important;
+}
+
+
+@media (max-width: 1200px) {
+  .left-sidebar {
+    display: none;
+  }
+}

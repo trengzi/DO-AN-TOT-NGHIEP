@@ -1,0 +1,64 @@
+<div style="margin-top: 20px; padding: 40px 0;">
+  <div class="container" style="width: 100%; max-width: unset;">
+  <div class="form-block mx-auto">
+    <div class="text-center mb-4">
+      <img src="assets/images/logo2.png" alt=""
+        style="width: 120px; height: 120px; object-fit: cover;">
+        BookStore
+      <div style="margin-top: 20px;"><b style="font-size: 25px; ">Đăng ký tài khoản</b></div>
+    </div>
+      <div class="form-group">
+        <label for="ho">Họ và Tên</label>
+        <input type="text" class="form-control" placeholder="Họ và Tên" id="ho" [(ngModel)]="hoVaTen">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="Email" class="form-control" placeholder="Email" id="email" [(ngModel)]="email">
+      </div>
+      <div class="form-group last mb-3 datePick">
+        <label for="password">Password</label>
+        <p-password [(ngModel)]="password" [toggleMask]="true"></p-password>
+        <div style="color: red; font-size: 13px; font-weight: 600;">{{rqPassword}}</div>
+      </div>
+      <div class="form-group">
+        <label for="sdt">Số điện thoại</label>
+        <input type="text" class="form-control" placeholder="Số điện thoại" id="sdt" [(ngModel)]="sdt">
+      </div>
+
+
+
+
+
+      <div class="form-group">
+        <label for="diachi">Địa chỉ</label>
+        <input type="text" class="form-control" placeholder="Địa chỉ" id="diachi" [(ngModel)]="address">
+      </div>
+      <div class="form-group datePick">
+        <label for="email">Ngày sinh</label>
+        <p-calendar [(ngModel)]="ngaySinh" dateFormat="dd/mm/yy"></p-calendar>
+      </div>
+
+      <input type="submit" value="Đăng ký" class="btn btn-block btn-primary" style="width: 100%;" (click)="showConfirmDialog()">
+    <div style="text-align: left; margin-top: 20px;">
+      <a>Đã có tài khoản?</a><a routerLink="/login" style="color: rgb(93, 25, 157);"> Đăng nhập</a>
+    </div>
+
+  </div>
+
+  <div class="area">
+    <ul class="circles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  </div>
+</div>
+<p-toast></p-toast>

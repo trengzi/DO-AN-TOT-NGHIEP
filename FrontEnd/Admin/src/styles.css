@@ -1,0 +1,118 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+.p-rating-icon path{
+  color: rgb(246 165 24);
+}
+
+.p-toast-message-icon{
+  margin-right: 20px;
+}
+
+.p-toast-detail{
+  margin: 0;
+}
+.p-toast-message-content{
+  padding: 10px;
+}
+.p-toast .p-toast-message.p-toast-message-success{
+  background: #cde7ce;
+}
+.p-toast-message-text div{
+  color: #38563a;
+  font-size: 15px;
+}
+.p-toast{
+  opacity: 1;
+}
+.p-toast-icon-close-icon{
+  color: #38563a;
+}
+.p-toast .p-toast-message .p-toast-message-content .p-icon{
+  color: #38563a;
+  width: 20px;
+}
+.p-toast .p-toast-message .p-toast-message-content .p-toast-message-icon{
+  font-size: 12px;
+}
+
+.p-toast .p-toast-message.p-toast-message-error {
+  background: rgba(255, 231, 230, 1);
+  border: solid #ff5757;
+  border-width: 0 0 0 6px;
+  color: #ff5757;
+}
+
+.p-toast-message-icon{
+  align-self: center;
+  color: red !important;
+}
+
+.p-dropdown,
+.p-multiselect{
+  padding: 5px 5px 5px 10px;
+  width: 100%;
+}
+.p-dropdown-item,
+.p-multiselect-item{
+  padding: 5px;
+  padding-right: 10px;
+}
+
+.p-dropdown-filter{
+  padding: 5px 10px;
+}
+
+.p-calendar .p-inputtext{
+  padding: 5px 10px;
+}
+
+.p-dialog-footer .p-button{
+  border-radius: 25px;
+  font-size: 14px;
+  margin-left: 20px;
+  padding: 8px 14px;
+}
+.p-dialog-footer{
+  padding-bottom:  10px;
+  padding-right: 20px;
+}
+
+.p-confirm-dialog-icon{
+  margin-right: 20px;
+}
+
+th, td{
+  text-align: center;
+   padding: 10px;
+}
+td{
+
+}
+
+ .p-dialog-header{
+  padding: 10px;
+}
+.p-dialog-content{
+  padding: 20px;
+}
+
+.body-wrapper-inner, .body-wrapper, .page-wrapper {
+  overflow: visible;
+}
+
+.p-dropdown-panel {
+  z-index: 9999 !important;
+}
+
+p-table .p-datatable-wrapper {
+  overflow: visible !important;
+  position: static !important;
+}
+
+p-table {
+  overflow: visible !important;
+  position: static !important;
+}

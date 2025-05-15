@@ -1,0 +1,226 @@
+<div style=" padding: 40px 0;">
+  <div class="container">
+  <div class="thanhtoan__container" style="display: flex;">
+    <div class="thanhtoan" style="width: 60%;  padding: 10px 20px;" *ngIf="account">
+      <h5>Thông tin giao hàng</h5>
+      <div class="thongtin" style="display: flex;padding: 20px 0;">
+        <div class="cotanh">
+          <img src="https://cdn-icons-png.flaticon.com/512/3574/3574808.png">
+        </div>
+        <div class="cotthongtin">
+          <div style="margin-top: 20px; margin-left: 10px;">{{account.fullName}}</div>
+          <!-- <div><a style="font-size: 14px;">Đăng xuất</a></div> -->
+        </div>
+      </div>
+      <div class="hang">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText [(ngModel)]="account.fullName" disabled="true">
+          <label for="float-input" class="labelFocus">Họ tên</label>
+      </span>
+      </div>
+      <div class="hang">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText [(ngModel)]="account.phoneNumber">
+          <label for="float-input" class="labelFocus">Số điện thoại</label>
+      </span>
+      </div>
+      <div class="hang">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText [(ngModel)]="account.email" disabled="true">
+          <label for="float-input" class="labelFocus">Email</label>
+      </span>
+      </div>
+
+      <div class="hang">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText [(ngModel)]="account.address">
+          <label for="float-input" class="labelFocus">Địa chỉ</label>
+        </span>
+      </div>
+      <div style="padding: 10px 0;">
+        <h5>Phương thức vận chuyển</h5>
+      </div>
+
+      <div style="margin-left: 40px;">
+
+
+        <label for="ingredient1" class=""  style="width: 100%;">
+          <div class="ma_item" style="display: flex;">
+            <div style="width: 8%; display: flex; align-items: center; justify-content: center;  padding-right: 5px;">
+              <p-radioButton name="pizza" value="Vận chuyển thường" [(ngModel)]="phuongThucVanChuyen" inputId="ingredient1" (ngModelChange)="tinhTongTien()"></p-radioButton>
+            </div>
+
+              <div style="width: 92%;">
+                <div>Vận chuyển thường: dự kiến 3-5 ngày</div>
+                <div>Phí vận chuyển: 25,000đ</div>
+              </div>
+          </div>
+        </label>
+
+
+        <label for="ingredient2" class=""  style="width: 100%;">
+          <div class="ma_item" style="display: flex;">
+            <div style="width: 8%; display: flex; align-items: center; justify-content: center; padding-right: 5px;">
+                <p-radioButton name="pizza" value="Vận chuyển siêu tốc" [(ngModel)]="phuongThucVanChuyen" inputId="ingredient2" (ngModelChange)="tinhTongTien()"></p-radioButton>
+            </div>
+
+            <div style="width: 92%;">
+                <div>Vận chuyển siêu tốc: dự kiến 1 - 3 ngày</div>
+                <div>Phí vận chuyển: 40,000đ</div>
+            </div>
+          </div>
+          </label>
+
+      </div>
+
+
+
+      <div style="padding: 10px 0;">
+        <h5>Phương thức thanh toán</h5>
+      </div>
+      <div style="margin-left: 40px;">
+
+
+        <label for="tt1" class=""  style="width: 100%;">
+          <div class="ma_item" style="display: flex;">
+            <div style="width: 8%; display: flex; align-items: center; justify-content: center;  padding-right: 5px;">
+              <p-radioButton name="pizza" value="Thanh toán khi giao hàng (COD)" [(ngModel)]="phuongThucThanhToan" inputId="tt1"></p-radioButton>
+            </div>
+
+              <div style="width: 92%; display: flex;">
+                <img class="main-img" src="https://hstatic.net/0/0/global/design/seller/image/payment/cod.svg?v=6">
+                <div style="display: flex; align-items: center; margin-left: 10px;">Thanh toán khi giao hàng (COD)</div>
+              </div>
+          </div>
+        </label>
+        <label for="tt2" class=""  style="width: 100%;">
+          <div class="ma_item" style="display: flex;">
+            <div style="width: 8%; display: flex; align-items: center; justify-content: center;  padding-right: 5px;">
+              <p-radioButton name="pizza" value="Thanh toán bằng mã QR" [(ngModel)]="phuongThucThanhToan" inputId="tt2"></p-radioButton>
+            </div>
+
+              <div style="width: 92%; display: flex;">
+                <img class="main-img" src="https://static.vecteezy.com/system/resources/previews/012/284/013/original/qr-code-icon-special-identity-illustration-as-simple-sign-and-trendy-symbol-for-design-websites-presentation-or-apps-elements-vector.jpg">
+                <div style="display: flex; align-items: center; margin-left: 10px;">Thanh toán bằng mã QR</div>
+              </div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+
+    <div class="giam__container" style="width: 40%; padding: 10px 20px;">
+      <div class="giam">
+        <div class="item" style="display: flex;" *ngFor="let item of listSanPham">
+          <div class="item__img" style="width: 20%; display: flex; align-items: center; justify-content: center;">
+            <img style="width: 70px; height: 80px;" [src]="item.book.imageUrls">
+          </div>
+          <div class="item__info" style="width: 60%; display: flex; align-items: center; margin-left: 10px;">
+            <div>
+              <div>{{item.book.title}}</div>
+              <div><a style="font-size: 14px;">Code: {{item.book.code}}</a></div>
+            </div>
+          </div>
+          <div class="item__gia" style="width: 20%; display: flex; align-items: center; margin-left: 10px;">
+            <p style="margin: 0; font-size: 12px; width: 100%; text-align: right;" *ngIf="!item.book.priceDiscount">{{(item.book.price * item.soLuong)| formatVnd}}</p>
+            <p style="margin: 0; font-size: 12px; width: 100%; text-align: right;" *ngIf="item.book.priceDiscount">{{(item.book.priceDiscount * item.soLuong) | formatVnd}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="magiam">
+        <h5 style="font-family: roboto; margin-bottom: 10px;">Phiếu giảm giá</h5>
+        <div class="list_ma" style="max-height: 200px; " *ngIf="maGiamGia">
+          <div class="ma_item" style="display: flex; padding: 0;" *ngFor="let item of maGiamGia">
+            <div 
+              style="display: flex; justify-content: space-between; width: 100%; padding: 10px;" 
+              [ngStyle]="{'background-color': item.code == maGiam ? 'rgb(199, 237, 237)' : ''}">
+              <div style="width: 70%;">
+                <div>Mã giảm: {{item.code}}</div>
+                <div>Lượng giảm: {{item.discountPercent}}%</div>
+                <div *ngIf="item.minOrder">Đơn tối thiểu: {{item.minOrder | formatVnd}}</div>
+                <div style="display: flex;">
+                  <div style="font-size: 12px; width: 120px;">Đã dùng:</div>
+                  <div style="width: 100%; display: flex; align-items: center;" class="prb">
+                    <p-progressBar [value]="(item.used / item.quantity) * 100"></p-progressBar>
+                  </div>
+                </div>
+              </div>
+              <div style="width: 30%; display: flex; align-items: center; justify-content: right;">
+                <ng-container *ngIf="item.used >= item.quantity || (item.minOrder && tongTien < item.minOrder); else suDung">
+                  <span style="color: gray; font-size: 12px;">Không khả dụng</span>
+                </ng-container>
+                <ng-template #suDung>
+                  <button 
+                    pButton 
+                    type="button" 
+                    class="p-button-raised p-button-rounded p-button-information" 
+                    style="border-radius: 25px; padding: 5px 12px;justify-content: center; font-size: 14px;" 
+                    (click)="dungMaGiam(item.id, item.code, item.discountPercent)">
+                    Sử dụng
+                  </button>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+          
+        <div class="list_ma" style="max-height: 200px; " *ngIf="maGiamGia.length == 0">
+          <img src="https://cdn-icons-png.flaticon.com/512/11329/11329060.png" style="width: 100%; height: 199px; object-fit: contain;">
+
+        </div>
+      </div>
+      <div style="padding: 20px 0; border-bottom: solid 1px lightgray;">
+        <div class="tong_dong" >
+          <h6 style="color: gray;">Tạm tính</h6>
+          <p style="margin:0;color: gray; ">{{tongTien}}</p>
+        </div>
+        <div class="tong_dong" *ngIf="maGiam">
+          <h6 style="color: gray;" style="align-items: center; display: flex; opacity: 0.6; font-size: 14px;">Giảm giá theo mã: {{maGiam}}</h6>
+          <p style="margin:0;color: gray; font-size: 14px; text-align: right;">Lượng giảm: {{luongGiam}}%</p>
+        </div>
+        <div class="tong_dong">
+          <h6 style="color: gray;">Phí vận chuyển</h6>
+          <p style="margin:0;color: gray; " *ngIf="phuongThucVanChuyen == 'Vận chuyển thường'">{{25000 | formatVnd}}</p>
+          <p style="margin:0;color: gray; " *ngIf="phuongThucVanChuyen == 'Vận chuyển siêu tốc'">{{40000 | formatVnd}}</p>
+        </div>
+      </div>
+      <div style="padding: 20px 0;">
+        <div class="tong_dong">
+          <h6 style="color: gray;">Tổng cộng</h6>
+          <p style="margin:0;color: rgb(19, 4, 75); font-size: 20px; ">
+            <span style="font-size: 14px; color: lightgray;">VND</span>
+            {{tongCong | formatVnd}}
+          </p>
+        </div>
+      </div>
+      <div>
+        Ghi chú:
+        <textarea pInputTextarea [(ngModel)]="note" style="width: 100%;"></textarea>
+      </div>
+      <div style="margin-top: 20px;">
+        <button pButton type="button" class="p-button-raised p-button-rounded p-button-information" style="border-radius: 25px; padding: 12px 15px; width: 100%;justify-content: center; font-size: 20px; " (click)="hoanTatDonHang()">Hoàn tất đơn hàng</button>
+      </div>
+    </div>
+  </div>
+  <p-confirmDialog header="Đặt hàng" icon="fas fa-circle-info"></p-confirmDialog>
+  <p-dialog header="" [(visible)]="display" [style]="{width: '400px'}" [closable]="false" [draggable]="false" [modal]="true">
+    <div style="text-align: center; margin-bottom: 25px;">
+        <img src="https://cdn-icons-png.freepik.com/512/6815/6815090.png" style="width: 100px; height: 100px; object-fit: cover;">
+    </div>
+    <div style="text-align: center; font-size: 24px;">Đặt hàng thành công</div>
+  </p-dialog>
+
+  <p-dialog header="Thông tin chuyển khoản" [(visible)]="showQR" [style]="{width: '500px'}" [draggable]="false" [modal]="true">
+    <div style="text-align: center;">
+        <img [src]="imgQR" style="width: 400px; height: auto; object-fit: cover;">
+        <span>Nội dung chuyển khoản(bắt buộc chứa chuỗi): {{chuoiCK}}</span>
+    </div>
+    <div>
+      <p style="text-align: right;">{{ minutes }}:{{ seconds < 10 ? '0' : '' }}{{ seconds }}</p>
+    </div>
+    <p-progressBar mode="indeterminate"></p-progressBar>
+  </p-dialog>
+  </div>
+  </div>
+  <p-toast></p-toast>
+
+

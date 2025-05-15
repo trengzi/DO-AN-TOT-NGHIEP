@@ -1,0 +1,62 @@
+.chitietdonhang_row1_con{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+.con_right{
+  display: flex;
+  align-items: center;
+}
+p{
+  margin: 0;
+}
+.item_vc{
+  display: flex;
+  padding: 10px;
+}
+
+.row3{
+  background-color: rgb(223, 247, 254);
+}
+.item{
+  padding: 20px;
+  margin-bottom: 10px;
+  border-bottom: solid 1px lightgray;
+}
+.ma_item{
+  padding: 10px;
+}
+.tablesp div{
+  text-align: center;
+}
+.item__gia{
+  justify-content: center;
+}
+
+.tt_thuong{
+  display: flex; justify-content: right;
+}
+.tt_thuong p{
+  color: gray;
+}
+.tt_title{
+  width: 150px;
+  text-align: left;
+}
+.tt_gia{
+  width: 120px;
+  text-align: right;
+}
+span div{
+  width: 30px;
+  height: 30px;
+  border: solid lightgray 1px;
+  border-radius: 50%;
+  margin-top: 0px !important;
+  margin-left: 20px;
+}
+.item__mau{
+  align-items: center;
+}

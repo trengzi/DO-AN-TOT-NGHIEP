@@ -1,0 +1,109 @@
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+data-sidebar-position="fixed" data-header-position="fixed">
+  <div class="body-wrapper">
+    <!--  Header Start -->
+
+    <!--  Header End -->
+    <div class="body-wrapper-inner">
+      <p-table [value]="listSupplier" [tableStyle]="{'min-width': '60rem'}">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between" style="display: flex; justify-content: space-between;">
+                Nhà cung cấp
+                <button pButton pRipple type="button" label="Thêm mới" class="p-button-info p-button-text" style="padding: 8px; border-radius: 5px; font-weight: 800;" (click)="showThemMoi()"></button>
+                <p-button icon="pi pi-refresh" (onClick)="getAll()"></p-button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Tên</th>
+                <th>Địa chỉ</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.fullName}}</td>
+                <td>{{product.address}}</td>
+                <td>{{product.email}}</td>
+                <td>{{product.phone}}</td>
+                <td>
+                  <button pButton pRipple type="button" class="p-button-info p-button-text" style="padding: 8px; border-radius: 5px;" (click)="this.showSua(product.id)"><i class=" pi pi-pencil"></i></button>
+                  <button pButton pRipple type="button" class="p-button-danger p-button-text" style="padding: 8px; border-radius: 5px;" (click)="deleteBook(product.id)"><i class=" pi pi-trash"></i></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+
+            </div>
+        </ng-template>
+      </p-table>
+      <div style="text-align: center; width: 100%;">
+        <p-paginator  [rows]="20" [totalRecords]="listSupplier.length"></p-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Thêm mới/Sửa nhà cung cấp" [(visible)]="showForm" maximizable="true" [style]="{width: '700px'}" [draggable]="false" [modal]="true">
+
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Tên:</span>
+        </div>
+        <div style="width: 100%;">
+          <input type="text" pInputText [(ngModel)]="body.fullName" style="padding: 5px 10px; width: 100%;"/>
+        </div>
+
+      </div>
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Địa chỉ:</span>
+        </div>
+        <div style="width: 100%;">
+          <textarea pInputTextarea [(ngModel)]="body.address" style="padding: 5px 10px; width: 100%;"></textarea>
+        </div>
+
+      </div>
+
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Email:</span>
+        </div>
+        <div style="width: 100%;">
+          <input type="text" pInputText [(ngModel)]="body.email" style="padding: 5px 10px; width: 100%;"/>
+        </div>
+
+      </div>
+      <div class="itemDes">
+        <div>
+          <span style="margin-right: 20px;">Số điện thoại:</span>
+        </div>
+        <div style="width: 100%;">
+          <input type="text" pInputText [(ngModel)]="body.phone" style="padding: 5px 10px; width: 100%;"/>
+        </div>
+
+      </div>
+
+
+    <div style="text-align: center;" *ngIf="showUpdate == false">
+      <button pButton pRipple type="button" label="Thêm" class="p-button-info p-button-text" style="padding: 8px; border-radius: 5px; font-weight: 800; margin-right: 20px;" (click)="addBook()"></button>
+    </div>
+    <div style="text-align: center;" *ngIf="showUpdate">
+      <button pButton pRipple type="button" label="Sửa" class="p-button-info p-button-text" style="padding: 8px; border-radius: 5px; font-weight: 800; margin-right: 20px;" (click)="updateBook()"></button>
+    </div>
+  </div>
+  </div>
+
+
+
+</p-dialog>
+
+<p-confirmDialog header="Xóa bản ghi" icon="fas fa-circle-info"></p-confirmDialog>
+<p-toast></p-toast>

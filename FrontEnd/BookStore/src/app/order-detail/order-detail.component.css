@@ -1,0 +1,124 @@
+.chitietdonhang_row1_con{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+.con_right{
+  display: flex;
+  align-items: center;
+}
+p{
+  margin: 0;
+}
+.item_vc{
+  display: flex;
+  padding: 10px;
+}
+
+.row3{
+  background-color: rgb(223, 247, 254);
+}
+.item{
+  padding: 20px;
+  margin-bottom: 10px;
+  border-bottom: solid 1px lightgray;
+}
+.ma_item{
+  padding: 10px;
+}
+.tablesp div{
+  text-align: center;
+}
+.item__gia{
+  justify-content: center;
+}
+
+.tt_thuong{
+  display: flex; justify-content: right;
+}
+.tt_thuong p{
+  color: gray;
+}
+.tt_title{
+  width: 150px;
+  text-align: left;
+}
+.tt_gia{
+  width: 120px;
+  text-align: right;
+}
+span div{
+  width: 30px;
+  height: 30px;
+  border: solid lightgray 1px;
+  border-radius: 50%;
+  margin-top: 0px !important;
+  margin-left: 20px;
+}
+.item__mau{
+  align-items: center;
+}
+
+:host ::ng-deep .p-dialog-footer .p-button{
+  border-radius: 25px;
+  font-size: 14px;
+  margin-left: 20px;
+  padding: 8px 14px;
+}
+:host ::ng-deep .p-confirm-dialog .p-dialog-content{
+  padding: 0 100px 50px 24px;
+}
+:host ::ng-deep .p-dialog-footer{
+  padding-bottom:  10px;
+  padding-right: 20px;
+}
+
+:host ::ng-deep .hang3 .p-rating-icon{
+  width: 27px;
+  height: 27px;
+}
+
+:host ::ng-deep .uploadFile .p-button{
+  font-size: 12px;
+  padding: 8px 14px;
+}
+
+:host ::ng-deep .p-fileupload-buttonbar{
+  padding: 10px 20px;
+}
+:host ::ng-deep .p-fileupload-content{
+  padding: 16px;
+  overflow-x: scroll;
+}
+
+:host ::ng-deep .p-fileupload-row div{
+  display: none;
+}
+
+:host ::ng-deep .p-fileupload-row div img{
+  width: 200px;
+  height: 240px;
+  object-fit: cover;
+}
+
+:host ::ng-deep .p-fileupload-row div:first-child,
+:host ::ng-deep .p-fileupload-row div:last-child{
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+}
+:host ::ng-deep .p-fileupload-row div:last-child{
+  position: absolute;
+  top: 0;left: 170px;
+}
+:host ::ng-deep .p-fileupload-row div .p-button{
+  padding: 8px 10px;
+  width: unset;
+  border-radius: 2px;
+}
+:host ::ng-deep .uploadFile .p-fileupload-files .ng-star-inserted{
+  display: flex;
+  position: relative;
+}

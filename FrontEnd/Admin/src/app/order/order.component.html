@@ -1,0 +1,193 @@
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+data-sidebar-position="fixed" data-header-position="fixed">
+  <div class="body-wrapper">
+    <!--  Header Start -->
+
+    <!--  Header End -->
+    <div class="body-wrapper-inner">
+      <p-table [value]="listDonHang" [tableStyle]="{'min-width': '60rem'}">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between" style="display: flex; justify-content: space-between;">
+                Đơn hàng
+                <p-button icon="pi pi-refresh" (onClick)="getAll()"></p-button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Code</th>
+                <th>Ngày tạo</th>
+                <th>Trạng thái</th>
+                <th>Thành tiền</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.code}}</td>
+                <td>{{product.created |  date:'dd/MM/yyyy'}}</td>
+                <td style="display: flex; justify-content: space-between;">
+                  <span style="margin-right: 15px; cursor: pointer;"  (click)="changeStatusDown(product.id)" *ngIf="product.status != TrangThaiDonHang.DaHuy">
+                    <i class="pi pi-chevron-circle-left" style="color: orange;"></i>
+                  </span>
+                  <span style="margin-right: 15px; cursor: pointer;"  (click)="changeStatusDown(product.id)" *ngIf="product.status == TrangThaiDonHang.DaHuy">
+
+                  </span>
+                  {{product.status}}
+                  <span style="margin-left: 15px; cursor: pointer;" (click)="changeStatusUp(product.id)"  *ngIf="product.status != TrangThaiDonHang.GiaoHangThanhCong">
+                    <i class="pi pi-box" style="color: green;"></i>
+                    <i class="pi pi-chevron-right" style="color: green;"></i>
+                  </span>
+
+                  <span style="margin-right: 15px; cursor: pointer;"  (click)="changeStatusDown(product.id)" *ngIf="product.status == TrangThaiDonHang.GiaoHangThanhCong">
+
+                  </span>
+                </td>
+                <td>{{product.totalPrice | formatVnd}}</td>
+                <td style="width: 100px;">
+                  <button pButton pRipple type="button" class="p-button-info p-button-text" style="padding: 8px; border-radius: 5px;" (click)="this.showOrder(product.id)"><i class=" pi pi-eye"></i></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+
+            </div>
+        </ng-template>
+      </p-table>
+      <div style="text-align: center; width: 100%;">
+        <p-paginator [rows]="20" [totalRecords]="listDonHang.length"></p-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Thông tin đơn hàng" [(visible)]="showForm" maximizable="true" [style]="{width: '100%', maxHeight: '100vh'}" [draggable]="false" [modal]="true">
+
+<div>
+  <div class="chitietdonhang_row1_con">
+    <div class="con_left" style="margin: 10px 0 !important;">
+        <h4>Chi tiết đơn hàng: {{curOrder.code}}</h4>
+        <p>Trạng thái đơn hàng:
+          <span style="color: rgb(7, 7, 98); font-weight: bold;"*ngIf="curOrder.status == TrangThaiDonHang.ChoXacNhan">{{curOrder.status}} <i class="fas fa-hourglass-half"></i></span>
+          <span style="color: green; font-weight: bold;"*ngIf="curOrder.status == TrangThaiDonHang.DangChuanBiHang"> <i class="fas fa-truck-moving"></i> {{curOrder.status}}</span>
+          <span style="color: green; font-weight: bold;"*ngIf="curOrder.status == TrangThaiDonHang.DangGiaoHang"> <i class="fas fa-truck-moving"></i> {{curOrder.status}}</span>
+          <span style="color: green; font-weight: bold;"*ngIf="curOrder.status == TrangThaiDonHang.GiaoHangThanhCong">{{curOrder.status}} <i class="far fa-circle-check"></i></span>
+          <span style="color: red; font-weight: bold;"*ngIf="curOrder.status == TrangThaiDonHang.DaHuy">{{curOrder.status}}</span>
+        </p>
+    </div>
+    <div class="con_right">
+        <p>Ngày tạo: {{curOrder.created | date: "dd/mm/yyyy HH:mm"}}</p>
+    </div>
+</div>
+<div style="display: flex; padding: 10px 0;">
+  <div class="chitietdonhang_row2_con">
+    <h6 style="font-weight: 600; color: green;">Phương thức vận chuyển: </h6>
+    <div class="item_vc">
+      <div style="display: flex; align-items: center; padding: 5px; margin: 0 20px;">
+        <i class="fa-solid fa-truck-fast"></i>
+      </div>
+      <div *ngIf="curOrder.shippingMethod == PhuongThucVanChuyen.VanChuyenThuong">
+        <div>Vận chuyển thường: dự kiến 3-5 ngày</div>
+        <div>Phí vận chuyển: 25,000đ</div>
+      </div>
+      <div *ngIf="curOrder.shippingMethod == PhuongThucVanChuyen.VanChuyenSieuToc">
+        <div>Vận chuyển siêu tốc: nhận hàng trong ngày hoặc ngày mai</div>
+        <div>Phí vận chuyển: 40,000đ</div>
+      </div>
+    </div>
+</div>
+<div class="chitietdonhang_row2_con" style="padding: 0 20px; margin-left: 30px; border-left: solid gray 1px;">
+  <h6 style="font-weight: 600; color: green;">Mã giảm giá: </h6>
+  <div class="ma_item" style="display: flex;">
+    <div style="padding: 0 25px; display: flex; align-items: center;" >
+      <i class="fa-solid fa-ticket" style="font-size: 19px;"></i>
+    </div>
+    <div>
+      <div>Mã: {{curOrder.couponCode}}</div>
+      <div>Lượng giảm: {{curOrder.couponPercent}}%</div>
+    </div>
+  </div>
+</div>
+<div class="chitietdonhang_row2_con" style="padding: 0 20px; margin-left: 30px; border-left: solid gray 1px;">
+  <h6 style="font-weight: 600; color: green;">Người nhận:</h6>
+      <div>Số điện thoại: {{curOrder.phoneNumber}}</div>
+      <div>Tên: {{curOrder.fullName}}</div>
+</div>
+</div>
+<div style="display: flex; padding: 10px 0 20px 0; ">
+<div class="chitietdonhang_row2_con" style="width: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19); padding: 10px; border-radius: 10px;">
+  <h6 style="font-weight: 600; color: darkblue;">Địa chỉ: </h6>
+    <div class="item_vc">
+      <div style="padding: 0 25px; display: flex; align-items: center; margin: 10px 0;" >
+        <i class="fa-solid fa-map-location-dot"></i>
+      </div>
+      <div>
+        {{curOrder.address}}
+      </div>
+    </div>
+</div>
+<div class="chitietdonhang_row2_con" style="padding: 0 20px; margin-left: 30px; border-left: solid gray 1px; width: 50%;">
+  <h6 style="font-weight: 600; color: darkblue;">Thanh toán: </h6>
+    <div class="item_vc" >
+      <div style="padding: 0 25px; display: flex; align-items: center; margin: 10px 0;" >
+        <i class="fa-solid fa-credit-card"></i>
+      </div>
+      <div>
+        {{curOrder.paymentMethod}}
+      </div>
+    </div>
+</div>
+</div>
+<div class="ghichu">
+<h6>Ghi chú: </h6>
+<div>
+  <textarea pInputTextarea [cols]="95" [rows]="5" style="width: 100%;" disabled [(ngModel)]="curOrder.note"></textarea>
+</div>
+</div>
+
+
+<div class="row3">
+  <div style="display: flex; padding: 10px 20px; border-bottom: solid 1px lightgray; background-color: rgb(235, 213, 255); font-weight: 700;" class="tablesp">
+    <div style="width: 60%"><p style="font-family: 'roboto';">Thông tin sản phẩm</p></div>
+    <div  style="width: 15%"><p style="font-family: 'roboto';">Giá</p></div>
+    <div  style="width: 10%"><p style="font-family: 'roboto';">Số lượng</p></div>
+    <div  style="width: 15%"><p style="font-family: 'roboto';">Đơn giá</p></div>
+  </div>
+  <div class="list_item">
+    <div class="item" style="display: flex;" *ngFor="let item of listOrderProduct">
+
+      <div class="item__img" style="width: 15%; display: flex; align-items: center; justify-content: center;">
+        <img style="width: 70px; height: 80px;" [src]="item.imageUrls">
+      </div>
+      <div class="item__info" style="width: 45%; display: flex; align-items: center; margin-left: 10px;">
+        <div>
+          <div>{{item.title}}</div>
+          <div>Code: {{item.code}}</div>
+        </div>
+      </div>
+      <div class="item__gia" style="width: 15%; display: flex; align-items: center;">
+        <p style="margin: 0;" >{{item.unitPrice | formatVnd}}</p>
+      </div>
+      <div class="item__gia" style="width: 10%; display: flex; align-items: center;">
+        <p style="margin: 0;">{{item.quantity}}</p>
+      </div>
+      <div class="item__gia" style="width: 15%; display: flex; align-items: center;">
+        <p style="margin: 0;" >{{item.unitPrice * item.quantity | formatVnd}}</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div>
+
+  <div style="display: flex; justify-content: right;">
+    <p class="tt_title" style="font-weight: 600; font-size: 18px;">Thanh Toán: </p>
+    <p class="tt_gia" style="font-size: 20px; color: red; font-weight: bold;">{{curOrder.totalPrice | formatVnd}} </p>
+  </div>
+</div>
+</div>
+
+
+
+</p-dialog>
+<p-toast></p-toast>

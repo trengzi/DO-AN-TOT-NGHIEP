@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+.p-rating-icon path{
+  color: rgb(246 165 24);
+}
+
+.p-toast-detail{
+  margin: 0;
+}
+.p-toast-message-content{
+  padding: 10px;
+}
+.p-toast .p-toast-message.p-toast-message-success{
+  background: #cde7ce;
+}
+.p-toast-message-text div{
+  color: #38563a;
+  font-size: 15px;
+}
+.p-toast{
+  opacity: 1;
+}
+.p-toast-icon-close-icon{
+  color: #38563a;
+}
+.p-toast .p-toast-message .p-toast-message-content .p-icon{
+  color: #38563a;
+  width: 20px;
+}
+.p-toast .p-toast-message .p-toast-message-content .p-toast-message-icon{
+  font-size: 12px;
+}
+
+.p-toast .p-toast-message.p-toast-message-error {
+  background: rgba(255, 231, 230, 1);
+  border: solid #ff5757;
+  border-width: 0 0 0 6px;
+  color: #ff5757;
+}
+
+.p-toast-message-icon{
+  align-self: center;
+  color: red !important;
+}

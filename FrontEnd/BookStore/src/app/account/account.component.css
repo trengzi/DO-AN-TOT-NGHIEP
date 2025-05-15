@@ -1,0 +1,50 @@
+.taikhoan{
+  display: flex;
+}
+.cot{
+  padding: 10px 20px;
+  width: 50%;
+}
+p{
+  margin: 0;
+}
+.p-float-label{
+  margin-bottom: 10px;
+}
+.cot__left input{
+  width: 100%;
+}
+.anhnguoidung{
+  padding: 10px;
+  float: left;
+}
+.diachi__container{
+  display: flex;
+  margin-top: 30px;
+}
+.diachi__container input{
+  width: 80%;
+  padding: 5px 10px;
+}
+.diachi__container .p-float-label{
+  text-align: center;
+}
+
+.diachi__container label{
+  left: 25px;
+}
+.item__diachi{
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+}
+img{
+  object-fit: cover;
+}
+
+.labelChange{
+}
+
+

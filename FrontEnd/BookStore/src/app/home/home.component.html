@@ -1,0 +1,342 @@
+<a class="scroll-top-arrow" href="javascript:void(0);"><i class="fa fa-angle-up"></i></a>
+
+<!--LOADER-->
+
+<!--LOADER-->
+
+<!-- START HEADER NAVIGATION -->
+
+<!-- END HEADER NAVIGATION -->
+
+<!--BANNER START-->
+<div class="homer-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center text-center text-lg-left">
+                <div class="banner-description">
+                    <span class="small-heading animated fadeInRight delay-1s">LỰA CHỌN TỐT NHẤT</span>
+                    <h1 style="width: 100%; animation: fadeInLeft 1s ease 1s both;" class="animated">
+                        <span style="font-family: 'Georgia', serif; font-size: 32px;">BỘ SƯU TẬP</span>
+                        <span style="font-family: 'Roboto', sans-serif; font-weight: bold; color: rgb(45, 112, 0);"> SÁCH</span>
+                      </h1>
+                    <a routerLink="/product-list" class="btn animated fadeInLeft delay-1s">ĐẾN CỬA HÀNG NGAY! </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--BANNER END-->
+
+<!--START OUR SERVICES-->
+<div class="our-services">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-12 col-md-12 col-lg-3">
+                <div class="service">
+                    <div class="media">
+                        <div class="service-card">
+                            <i class="fas fa-truck mr-3"></i>
+                            <div class="media-body">
+                                <h5 class="mt-0">Miễn phí vận chuyển</h5>
+                                <span>Đơn hàng trên 500K</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3">
+                <div class="service">
+                    <div class="media">
+                        <div class="service-card">
+                            <i class="fas fa-undo mr-3"></i>
+                            <div class="media-body">
+                                <h5 class="mt-0">Đảm bảo hoàn tiền</h5>
+                                <span>Hoàn tiền 100%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3">
+                <div class="service">
+                    <div class="media">
+                        <div class="service-card">
+                            <i class="fas fa-piggy-bank mr-3"></i>
+                            <div class="media-body">
+                                <h5 class="mt-0">Thanh toán</h5>
+                                <span>Thanh toán khi nhận hàng</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3">
+                <div class="service">
+                    <div class="media">
+                        <div class="service-card">
+                            <i class="fas fa-hands-helping mr-3"></i>
+                            <div class="media-body">
+                                <h5 class="mt-0">Hỗ trợ & Tư vấn</h5>
+                                <span>Gọi ngay: +0123.4567.89</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--END OUR SERVICES-->
+
+<!-- START PORTOLIO SECTION -->
+<div class="portfolio-section">
+    <div class="container">
+        <div class="row">
+
+            <!-- START PORTFOLIO HEADING -->
+            <div class="col-12">
+                <div class="portfolioHeading text-center">
+                    <h1 class="high-lighted-heading" style="font-family: roboto;">Sách tiêu biểu</h1>
+                    <p>Sách đang thịnh hành và được đọc giả quan tâm trong thời gian gần đây.</p>
+                </div>
+            </div>
+            <!-- END PORTFOLIO HEADING -->
+
+            <!-- START FILTERS -->
+            <div class="col-12">
+                <div class="clearfix d-flex justify-content-center">
+                    <div id="js-filters-blog-posts" class="cbp-l-filters-button cbp-1-filters-alignCenter">
+                        <div class="btnSelect"  (click)="getListSanPhamTuan()" [ngClass]="{'selectedButton': selectedButton == 1 }">Bán chạy trong tuần</div>
+                        <div class="btnSelect" (click)="getListSanPhamThang()" [ngClass]="{'selectedButton': selectedButton == 2 }">Bán chạy trong tháng</div>
+                        <div class="btnSelect" (click)="getListSanPhamDGC()" [ngClass]="{'selectedButton': selectedButton == 3 }">Sản phẩm đánh giá cao</div>
+                    </div>
+                </div>
+            </div>
+            <!-- END FILTERS -->
+
+            <!-- START PORTFOLIO IMAGES -->
+            <div class="col-12">
+
+
+                <div *ngIf="selectedButton == 1">
+                  <div class="cbp-item" *ngFor="let item of listSanPhamTuan" style="position: relative;">
+
+                    <a class="portfolio-circle-cart" routerLink="/product-detail/{{item.id}}">
+                        <i class="fa fa-shopping-cart"></i>
+                    </a>
+
+                    <div class="  sync-portfolio-carousel-setting">
+                        <div class="item"> <a routerLink="/product-detail/{{item.id}}" class="cbp-caption" ><img src="{{item.imageUrls}}" alt=""></a></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="cbp-l-grid-blog-title"><a href="#" target="_blank"  style="font-size: 13px!important;">{{item.title}}</a></div>
+                        </div>
+                        <div class="col-12 text-center">
+                          <p class="card-text" style="font-weight: 600; color: green;"> {{item.priceDiscount != null ? (item.priceDiscount | formatVnd) : item.price | formatVnd}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 text-center">
+                        <div class="cbp-l-grid-blog-title" style="font-size: 11px;">Số lượng đã bán: {{item.numberSell}}</div>
+                      </div>
+                    </div>
+                </div>
+                </div>
+
+
+                <div *ngIf="selectedButton == 2">
+                  <div class="cbp-item" *ngFor="let item of listSanPhamThang" style="position: relative;">
+
+                    <a class="portfolio-circle-cart" routerLink="/product-detail/{{item.id}}">
+                        <i class="fa fa-shopping-cart"></i>
+                    </a>
+
+                    <div class="  sync-portfolio-carousel-setting">
+                        <div class="item"> <a routerLink="/product-detail/{{item.id}}" class="cbp-caption" ><img src="{{item.imageUrls}}" alt=""></a></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="cbp-l-grid-blog-title"><a href="#" target="_blank"  style="font-size: 13px!important;">{{item.title}}</a></div>
+                        </div>
+                        <div class="col-12 text-center">
+                          <p class="card-text" style="font-weight: 600; color: green;"> {{item.priceDiscount != null ? (item.priceDiscount | formatVnd) : item.price | formatVnd}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 text-center">
+                        <div class="cbp-l-grid-blog-title" style="font-size: 11px;">Số lượng đã bán: {{item.numberSell}}</div>
+                      </div>
+                    </div>
+                </div>
+                </div>
+
+                <div *ngIf="selectedButton == 3">
+                  <div class="cbp-item Fantasy" *ngFor="let item of listSanPhamDGC" style="position: relative;">
+
+                    <a class="portfolio-circle-cart" routerLink="/product-detail/{{item.id}}">
+                        <i class="fa fa-shopping-cart"></i>
+                    </a>
+
+                    <div class="cbp-caption-defaultWrap  owl-theme sync-portfolio-carousel">
+                        <div class="item"> <a routerLink="/product-detail/{{item.id}}" class="cbp-caption" ><img src="{{item.imageUrls}}" alt=""></a></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="cbp-l-grid-blog-title"><a href="#" target="_blank"  style="font-size: 13px!important;">{{item.title}}</a></div>
+                        </div>
+
+                        <div class="col-12 text-center">
+                          <p class="card-text" style="font-weight: 600; color: green;"> {{item.priceDiscount != null ? (item.priceDiscount | formatVnd) : item.price | formatVnd}}</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px;">
+                      <div class="col-12 text-center">
+                        <p-rating [stars]="5" [cancel]="false" [(ngModel)]="item.averageStar" [readonly]="true" ></p-rating>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!-- END PORTFOLIO IMAGES -->
+
+        </div>
+    </div>
+</div>
+<!-- END PORTOLIO SECTION -->
+
+<!--START BANNER SECTION-->
+<div class="banner-section parallax-slide">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6 text-center text-lg-left">
+                <div class="banner-content-wrapper">
+                    <span style="text-transform: uppercase; font-family: roboto; font-weight: 900;">Xu hướng được yêu thích</span>
+                    <h1 style="font-family: roboto;">Bộ sưu tập </h1>
+                    <p>"Khám phá những tác phẩm đặc sắc với nội dung hấp dẫn và đầy cảm hứng. Mỗi quyển sách là một câu chuyện, mở ra cánh cửa đến thế giới tri thức và sáng tạo."</p>
+                    <button type="button" class="btn green-color-yellow-gradient-btn" routerLink="/product-list">Xem ngay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--END BANNER SECTION-->
+
+<!--START LATEST ARRIVALS-->
+<div class="lastest_arrivals">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <h1>Sách thịnh hành</h1>
+            </div>
+
+            <div class="col-12">
+              <p-carousel [value]="listPublishedBook" styleClass="custom-carousel" [numVisible]="4" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+
+                <ng-template let-item pTemplate="item">
+
+                  <div class="lastest_arrival_items item">
+                    <a href="../style/book-shop/product-detail.html" class="lastest-addto-cart"><i class="fa fa-shopping-cart"></i></a>
+                    <div class="card">
+                        <span class="product-type" style="z-index: 100;">NEW</span>
+                        <div class="image-holder">
+                            <a routerLink="/product-detail/{{item.id}}" data-fancybox="lastest_product" data-title="Shirt Name">
+                                <img src="{{item.imageUrls}}" class="card-img-top" alt="Lastest Arrivals 1">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <h5 class="card-title">{{item.title}}</h5>
+                                </div>
+                                <div class="col-12 text-center">
+                                  <p class="card-text" style="font-weight: 600; color: green;"> {{item.priceDiscount != null ? (item.priceDiscount | formatVnd) : item.price | formatVnd}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </ng-template>
+              </p-carousel>
+            </div>
+        </div>
+    </div>
+</div>
+<!--END LATEST ARRIVALS-->
+
+<!--footer1 sec start-->
+<div class="footer">
+    <div class="container">
+        <div class="row footer-container">
+            <div class="col-sm-12 col-lg-4 f-sec1  text-center text-lg-left">
+                <h4 class="high-lighted-heading">About Us</h4>
+                <p>We take our mission of increasing our global access to quality education seriously. </p>
+                <a href="#">Read more</a>
+                <h4>Social Network</h4>
+                <div class="s-icons">
+                    <ul class="social-icons-simple">
+                        <li><a href="javascript:void(0)" class="facebook-bg-hvr"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                        <li><a href="javascript:void(0)" class="twitter-bg-hvr"><i class="fab fa-twitter" aria-hidden="true"></i></a> </li>
+                        <li><a href="javascript:void(0)" class="instagram-bg-hvr"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-5 f-sec2 ">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <h4 class="text-center text-md-left">Information</h4>
+                        <ul class="text-center text-md-left">
+                            <li><a href="javascript:void(0)">About Us</a></li>
+                            <li><a href="javascript:void(0)">Delivery Information</a></li>
+                            <li><a href="javascript:void(0)">Privacy Policy</a></li>
+                            <li><a href="javascript:void(0)">Terms & Condition</a></li>
+                            <li><a href="javascript:void(0)">FAQ</a></li>
+                            <li><a href="../style/book-shop/contact.html">Contact Us</a></li>
+                            <li><a href="../style/book-shop/product-listing.html">Products</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h4 class="text-center text-md-left">Account Info</h4>
+                        <ul class="text-center text-md-left">
+                            <li><a href="javascript:void(0)">Login & Register</a></li>
+                            <li><a href="../style/book-shop/shop-cart.html">Order History</a></li>
+                            <li><a href="javascript:void(0)">Shipping Info</a></li>
+                            <li><a href="javascript:void(0)">Refund Policy</a></li>
+                            <li><a href="javascript:void(0)">Responsive Website</a></li>
+                            <li><a href="javascript:void(0)">Subscription</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-3 f-sec3  text-center text-lg-left">
+                <h4>Our Portfolio</h4>
+                <div class="foot-tag-list">
+                    <span>Classic</span>
+                    <span>Journal</span>
+                    <span>History</span>
+                    <span>Poetry</span>
+                    <span>Dictionary</span>
+                    <span>Shopping</span>
+                    <span>Fantasy</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 footer_notes">
+                <p class="whitecolor text-center w-100 wow fadeInDown">&copy; 2020 MegaOne. Made With Love by <a class="web-link" href="http://www.themesindustry.com/" target="_blank">Themesindustry</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--foo0ter1 sec end-->
+
+<!--START SEARCH AREA-->
+
+<!--END SEARCH AREA -->
+
+

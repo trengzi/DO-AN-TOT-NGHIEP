@@ -1,0 +1,48 @@
+<div style=" padding: 40px 0;">
+  <div style="margin-bottom: 50px;">
+      <section id="slider-sec" class="slider-sec parallax" style="background: url('assets/images/banner1.2.jpg');">
+  </section>
+  </div>
+
+  <div class="container">
+    <div style="font-family: 'roboto'; font-size: 30px; font-weight: 600; color: rgb(5, 5, 80); margin-bottom: 20px; line-height: 1.3;">Từ khóa: <span style="font-size: 20px; opacity: 0.5;">{{keyword}}</span></div>
+    <div style="font-size: 15px;">{{20 * page + 1}}-{{20 * page + listBook.length}} trong {{curTotalRecord}}</div>
+    <div class="col-12 product-listing-products">
+
+      <!-- START DISPLAY PRODUCT -->
+      <div class="product-list row">
+
+          <div class="col-12 col-md-6 col-lg-3 manage-color-hover-settting wow slideInUp" data-wow-delay=".2s" *ngFor="let item of listBook">
+              <div class="product-item owl-theme product-listing-carousel ">
+                  <div class="item p-item-img" style="aspect-ratio: 1/1;">
+                          <img src="{{item.imageUrls}}" alt="images" style="object-fit: contain;">
+                      <div class="text-center d-flex justify-content-center align-items-center">
+                          <a class="listing-cart-icon" routerLink="/product-detail/{{item.id}}">
+                              <i class="fa fa-shopping-cart"></i>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+              <div class="p-item-detail">
+                  <h4 class="text-center p-item-name"><a routerLink="/product-detail/{{item.id}}"> {{item.title}} </a></h4>
+                  <p class="text-center p-item-price" >
+                    <span style="color: gray; font-size: 11px; font-weight: 600; text-decoration: line-through; margin-right: 10px;">{{item.price | formatVnd}} </span>
+                    <span style="color: green; font-weight: 600;">{{item.priceDiscount | formatVnd}} </span>
+
+                  </p>
+              </div>
+          </div>
+
+
+
+
+      </div>
+      <!-- END DISPLAY PRODUCT -->
+
+
+  </div>
+  <div style="text-align: center; width: 100%;">
+    <p-paginator (onPageChange)="onPageChange($event)" [rows]="20" [totalRecords]="curTotalRecord"></p-paginator>
+  </div>
+  </div>
+</div>

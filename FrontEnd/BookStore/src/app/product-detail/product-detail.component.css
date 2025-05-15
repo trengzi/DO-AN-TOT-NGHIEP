@@ -1,0 +1,20 @@
+#owl-demo .item{
+  margin: 3px;
+}
+#owl-demo .item img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.des p{
+  margin-bottom: 10px;
+}
+
+.des span{
+  font-weight: 700;
+}
+
+.media{
+  margin-bottom: 30px !important;
+}

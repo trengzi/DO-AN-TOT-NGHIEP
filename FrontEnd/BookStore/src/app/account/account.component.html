@@ -1,0 +1,81 @@
+<div style=" padding: 40px 0;">
+  <div class="container">
+  <div class="taikhoan__container">
+    <div class="taikhoan" style="width: 100%; display: block;">
+        <div class="" *ngIf="account">
+          <h4 style="margin-bottom: 60px;">Tài khoản</h4>
+          <div class="anhnguoidung">
+            <img style="width: 100px; height: 100px;" src="https://cdn-icons-png.flaticon.com/512/3574/3574808.png">
+          </div>
+          <div>
+            <span class="p-float-label" style="margin: 10px 15px;">
+              <input type="text" id="ten" pInputText style="" [(ngModel)]="account.fullName"/>
+              <label for="ten"  style="" class="labelChange">Tên người dùng</label>
+            </span>
+
+            <span class="p-float-label" style="margin: 10px 15px;">
+              <input type="text" id="tendn" pInputText  style="" disabled [(ngModel)]="account.email"/>
+              <label for="tendn" style="" class="labelChange">Tên đăng nhập (email)</label>
+            </span>
+
+            <span style="margin-top: 20px">
+              <button pButton pRipple type="button" label="Đổi mật khẩu" class="p-button-secondary p-button-text" style="font-family: 'roboto';" (click)="changePassword()"></button>
+            </span>
+
+            <!-- <span class="p-float-label">
+              <input type="text" id="email" pInputText  [(ngModel)]="account.email"/>
+              <label for="email" style="top: 12px;">Email</label>
+            </span> -->
+
+            <span class="p-float-label" style="margin: 10px 15px;">
+              <input type="text" id="sodienthoai" pInputText  [(ngModel)]="account.phoneNumber"/>
+              <label for="sodienthoai" style="" class="labelChange">Số điện thoại</label>
+            </span>
+          </div>
+          <div>
+            <span class="p-float-label datePick" style="margin: 10px 15px;">
+              <input type="text" id="ngaysinh" pInputText  [(ngModel)]="account.dateOfBirth"/>
+              <label for="ngaysinh" style="" class="labelChange">Ngày sinh</label>
+            </span>
+
+            <span class="p-float-label" style="margin: 10px 15px; width: 60%;">
+              <input type="text" id="diachi" pInputText  [(ngModel)]="account.address" style="width: 100%;"/>
+              <label for="diachi" style="" class="labelChange">Địa chỉ</label>
+            </span>
+          </div>
+            <!-- <div style="padding: 20px 0;">
+              <p-radioButton name="groupname" value="1" name="nam" [(ngModel)]="account.gioiTinh"></p-radioButton>
+              <label for="nam" style="margin-right: 20px; margin-left: 10px;"> Nam </label>
+              <p-radioButton name="groupname" value="0" name="nu" [(ngModel)]="account.gioiTinh"></p-radioButton>
+              <label for="nu" style="margin-left: 10px;"> Nữ </label>
+            </div> -->
+
+        </div>
+        <div style="width: 100%; text-align: center;">
+          <button pButton type="button" class="p-button-raised p-button-rounded p-button-information" style="border-radius: 25px; padding: 8px 15px;justify-content: center; font-size: 14px;" (click)="putUser()" >Lưu thông tin</button>
+        </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <p-dialog header="Đổi mật khẩu" [(visible)]="changePasswordModel" [style]="{width: '500px'}" [draggable]="false" [modal]="true">
+    <div style="margin-top: 40px;">
+          <span class="p-float-label" style=" width: 100%;">
+      <input type="password" id="oldPass" pInputText  [(ngModel)]="oldPass" style="width: 100%;"/>
+      <label for="oldPass" style="" class="labelChange">Mật khẩu hiện tại</label>
+      </span>
+      <span class="p-float-label" style=" width: 100%;">
+        <input type="password" id="newPass" pInputText  [(ngModel)]="newPass" style="width: 100%;"/>
+        <label for="newPass" style="" class="labelChange">Mật khẩu mới</label>
+      </span>
+      <span class="p-float-label" style="width: 100%;">
+        <input type="password" id="newPass2" pInputText  [(ngModel)]="newPass2" style="width: 100%;"/>
+        <label for="newPass2" style="" class="labelChange">Nhập lại mật khẩu</label>
+      </span>
+    </div>
+    <div style="text-align: center;">
+          <button pButton type="button" class="p-button-raised p-button-rounded p-button-information" style="border-radius: 25px; padding: 8px 15px;justify-content: center; font-size: 14px;" (click)="doChangePass()" >Xác nhận</button>
+
+    </div>
+  </p-dialog>
+<p-toast></p-toast>

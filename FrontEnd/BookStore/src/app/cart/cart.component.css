@@ -1,0 +1,11 @@
+.font-robo th,
+.font-robo td,
+.font-robo{
+  font-family: 'roboto';
+}
+
+
+.disabled {
+  pointer-events: none; /* Ngăn không cho click */
+  opacity: 0.6;         /* Giảm độ sáng */
+}

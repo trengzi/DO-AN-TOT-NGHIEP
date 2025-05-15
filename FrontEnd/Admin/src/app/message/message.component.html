@@ -1,0 +1,49 @@
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+data-sidebar-position="fixed" data-header-position="fixed">
+  <div class="body-wrapper">
+    <!--  Header Start -->
+
+    <!--  Header End -->
+    <div class="body-wrapper-inner">
+      <p-table [value]="listMessage" [tableStyle]="{'min-width': '60rem'}">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between" style="display: flex; justify-content: space-between;">
+                Lời nhắn
+                <p-button icon="pi pi-refresh" (onClick)="getAll()"></p-button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Tiêu đề</th>
+                <th>Nội dung</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.fullName}}</td>
+                <td>{{product.email}}</td>
+                <td>{{product.subject}}</td>
+                <td style="text-wrap: wrap;">{{product.content}}</td>
+                <td>
+                  <button pButton pRipple type="button" class="p-button-danger p-button-text" style="padding: 8px; border-radius: 5px;" (click)="deleteBook(product.id)" *ngIf="role != 3"><i class=" pi pi-trash"></i></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+
+            </div>
+        </ng-template>
+      </p-table>
+      <div style="text-align: center; width: 100%;">
+        <p-paginator  [rows]="20" [totalRecords]="listMessage.length"></p-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog header="Xóa bản ghi" icon="fas fa-circle-info"></p-confirmDialog>
+<p-toast></p-toast>

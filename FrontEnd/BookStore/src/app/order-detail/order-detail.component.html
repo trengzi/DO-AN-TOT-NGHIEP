@@ -1,0 +1,273 @@
+<div style=" padding: 40px 0;">
+  <div class="container">
+    <div class="chitietdonhang__container">
+      <div class="chitietdonhang" *ngIf="DonHang">
+        <div class="chitietdonhang_row1_con">
+          <div class="con_left" style="margin: 10px 0 !important;">
+            <h4>Chi tiết đơn hàng: {{DonHang.code}}</h4>
+            <p>Trạng thái đơn hàng:
+              <span style="color: rgb(7, 7, 98); font-weight: bold;"
+                *ngIf="DonHang.status == TrangThaiDonHang.ChoXacNhan">{{DonHang.status}} <i
+                  class="fas fa-hourglass-half"></i></span>
+              <span style="color: green; font-weight: bold;" *ngIf="DonHang.status == TrangThaiDonHang.DangChuanBiHang">
+                <i class="fas fa-truck-moving"></i> {{DonHang.status}}</span>
+              <span style="color: green; font-weight: bold;" *ngIf="DonHang.status == TrangThaiDonHang.DangGiaoHang"> <i
+                  class="fas fa-truck-moving"></i> {{DonHang.status}}</span>
+              <span style="color: green; font-weight: bold;"
+                *ngIf="DonHang.status == TrangThaiDonHang.GiaoHangThanhCong">{{DonHang.status}} <i
+                  class="far fa-circle-check"></i></span>
+              <span style="color: red; font-weight: bold;"
+                *ngIf="DonHang.status == TrangThaiDonHang.DaHuy">{{DonHang.status}}</span>
+            </p>
+          </div>
+          <div class="con_right">
+            <p>Ngày tạo: {{DonHang.created | date: "dd/MM/yyyy HH:mm"}}</p>
+          </div>
+        </div>
+        <div style="display: flex; padding: 10px 0;">
+          <div class="chitietdonhang_row2_con">
+            <h6 style="font-weight: 600; color: green;">Phương thức vận chuyển: </h6>
+            <div class="item_vc">
+              <div style="display: flex; align-items: center; padding: 5px; margin: 0 20px;">
+                <i class="fa-solid fa-truck-fast"></i>
+              </div>
+              <div *ngIf="DonHang.shippingMethod == PhuongThucVanChuyen.VanChuyenThuong">
+                <div>Vận chuyển thường: dự kiến 3-5 ngày</div>
+                <div>Phí vận chuyển: 25,000đ</div>
+              </div>
+              <div *ngIf="DonHang.shippingMethod == PhuongThucVanChuyen.VanChuyenSieuToc">
+                <div>Vận chuyển siêu tốc: nhận hàng trong ngày hoặc ngày mai</div>
+                <div>Phí vận chuyển: 40,000đ</div>
+              </div>
+            </div>
+          </div>
+          <div class="chitietdonhang_row2_con" style="padding: 0 20px; margin-left: 30px; border-left: solid gray 1px;">
+            <h6 style="font-weight: 600; color: green;">Mã giảm giá: </h6>
+            <div class="ma_item" style="display: flex;">
+              <div style="padding: 0 25px; display: flex; align-items: center;">
+                <i class="fa-solid fa-ticket" style="font-size: 19px;"></i>
+              </div>
+              <div>
+                <div>Mã: {{DonHang.couponCode}}</div>
+                <div>Lượng giảm: {{DonHang.couponPercent}}%</div>
+              </div>
+            </div>
+          </div>
+          <div class="chitietdonhang_row2_con" style="padding: 0 20px; margin-left: 30px; border-left: solid gray 1px;">
+            <h6 style="font-weight: 600; color: green;">Người nhận:</h6>
+            <div>Số điện thoại: {{DonHang.phoneNumber}}</div>
+            <div>Tên: {{DonHang.fullName}}</div>
+          </div>
+        </div>
+        <div style="display: flex; padding: 10px 0 20px 0; ">
+          <div class="chitietdonhang_row2_con"
+            style="width: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19); padding: 10px; border-radius: 10px;">
+            <h6 style="font-weight: 600; color: darkblue;">Địa chỉ: </h6>
+            <div class="item_vc">
+              <div style="padding: 0 25px; display: flex; align-items: center; margin: 10px 0;">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </div>
+              <div>
+                {{DonHang.address}}
+              </div>
+            </div>
+          </div>
+          <div class="chitietdonhang_row2_con"
+            style="padding: 0 20px; margin-left: 30px; border-left: solid gray 1px; width: 50%;">
+            <h6 style="font-weight: 600; color: darkblue;">Thanh toán: </h6>
+            <div class="item_vc">
+              <div style="padding: 0 25px; display: flex; align-items: center; margin: 10px 0;">
+                <i class="fa-solid fa-credit-card"></i>
+              </div>
+              <div>
+                {{DonHang.paymentMethod}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ghichu">
+          <h6>Ghi chú: </h6>
+          <div>
+            <textarea pInputTextarea [cols]="95" [rows]="5" style="width: 100%;" disabled
+              [(ngModel)]="DonHang.note"></textarea>
+          </div>
+        </div>
+
+
+        <div class="row3">
+          <div
+            style="display: flex; padding: 10px 20px; border-bottom: solid 1px lightgray; background-color: rgb(235, 213, 255); font-weight: 700;"
+            class="tablesp">
+            <div style="width: 60%">
+              <p style="font-family: 'roboto';">Thông tin sản phẩm</p>
+            </div>
+            <div style="width: 15%">
+              <p style="font-family: 'roboto';">Giá</p>
+            </div>
+            <div style="width: 10%">
+              <p style="font-family: 'roboto';">Số lượng</p>
+            </div>
+            <div style="width: 15%">
+              <p style="font-family: 'roboto';">Đơn giá</p>
+            </div>
+          </div>
+          <div class="list_item">
+            <div class="item" style="display: flex;" *ngFor="let item of listSanPham">
+              <div class="item__danhGia"
+                style="width: 15%; display: flex; align-items: center; justify-content: center;">
+                <!-- Nút Xem đánh giá (nếu đã đánh giá) -->
+                <button *ngIf="item.daDanhGia" (click)="xemDanhGia(item)" class="btn btn-info">
+                  Xem đánh giá
+                </button>
+
+                <!-- Nút Đánh giá (nếu chưa đánh giá + trạng thái đơn là giao thành công) -->
+                <button *ngIf="!item.daDanhGia" [disabled]="DonHang.status !== TrangThaiDonHang.GiaoHangThanhCong"
+                  (click)="showDanhGia(item)" class="btn btn-primary">
+                  Đánh giá
+                </button>
+              </div>
+              <div class="item__img" style="width: 15%; display: flex; align-items: center; justify-content: center;">
+                <img style="width: 70px; height: 80px;" [src]="item.imageUrls">
+              </div>
+              <div class="item__info" style="width: 35%; display: flex; align-items: center; margin-left: 10px;">
+                <div>
+                  <div>Tên sản phẩm: {{item.title}}</div>
+                  <div>Mã sản phẩm: {{item.code}}</div>
+                </div>
+              </div>
+              <div class="item__gia" style="width: 15%; display: flex; align-items: center;">
+                <p style="margin: 0;">{{item.unitPrice | formatVnd}}</p>
+              </div>
+              <div class="item__gia" style="width: 10%; display: flex; align-items: center;">
+                <p style="margin: 0;">{{item.quantity}}</p>
+              </div>
+              <div class="item__gia" style="width: 15%; display: flex; align-items: center;">
+                <p style="margin: 0;">{{item.unitPrice * item.quantity | formatVnd}}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div>
+          <div class="tt_thuong">
+            <p class="tt_title">Tổng tiền: </p>
+            <p class="tt_gia">{{tongTien | formatVnd}} </p>
+          </div>
+          <div class="tt_thuong">
+            <p class="tt_title">Giảm qua mã: </p>
+            <p class="tt_gia">{{DonHang.couponPercent}}% </p>
+          </div>
+          <div class="tt_thuong">
+            <p class="tt_title">Phí vận chuyển: </p>
+            <p class="tt_gia">{{phiVanChuyen | formatVnd}}</p>
+          </div>
+
+          <div style="display: flex; justify-content: right;">
+            <p class="tt_title" style="font-weight: 600; font-size: 18px;">Thanh Toán: </p>
+            <p class="tt_gia" style="font-size: 20px; color: red; font-weight: bold;">{{thanhToan | formatVnd}} </p>
+          </div>
+        </div>
+        <div
+          *ngIf="DonHang.status == TrangThaiDonHang.ChoXacNhan || DonHang.trangThai==TrangThaiDonHang.DangChuanBiHang">
+          <button pButton type="button" class="p-button-raised p-button-rounded p-button-danger"
+            style="border-radius: 25px; padding: 12px 15px;" (click)="huyDonHang()">Hủy đơn hàng</button>
+        </div>
+        <div *ngIf="DonHang.status == TrangThaiDonHang.DangGiaoHang">
+          <button pButton type="button" class="p-button-raised p-button-rounded p-button-success"
+            style="border-radius: 25px; padding: 12px 15px;" (click)="daNhanHang()">Đã nhận hàng</button>
+        </div>
+      </div>
+    </div>
+    <p-confirmDialog header="Hủy đơn hàng" icon="fas fa-triangle-exclamation"></p-confirmDialog>
+    <p-dialog header="" [(visible)]="display" [style]="{width: '400px'}" [closable]="false" [draggable]="false"
+      [modal]="true">
+      <div style="text-align: center; margin-bottom: 25px;">
+        <img src="https://cdn-icons-png.freepik.com/512/6815/6815090.png"
+          style="width: 100px; height: 100px; object-fit: cover;">
+      </div>
+      <div style="text-align: center; font-size: 24px;">Hủy đơn hàng thành công</div>
+    </p-dialog>
+
+    <p-dialog header="Đánh giá sản phẩm" [(visible)]="displayDanhGia" [style]="{width: '800px'}" [draggable]="false"
+      [modal]="true" [maximizable]="true" *ngIf="sanPhamDanhGia">
+      <div class="hang3">
+        <div>
+
+        </div>
+        <div class="userDanhGia__container">
+          <div class="sanPhamDanhGia" style="display: flex; margin-bottom: 20px;">
+            <div class="spdg_anh" style="margin-right: 20px;">
+              <img [src]="sanPhamDanhGia.imageUrls" style="width: 70px; height: 80px; object-fit: cover;">
+            </div>
+            <div class="spdh_mota">
+              <p style="font-weight: bold;">{{sanPhamDanhGia.title}}</p>
+              <p>Code: {{sanPhamDanhGia.code}}</p>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; margin-left: 120px;">
+              <p-rating [stars]="5" [cancel]="false" [(ngModel)]="userRating"></p-rating>
+            </div>
+          </div>
+          <div style="margin-bottom: 20px;" class="uploadFile">
+            <!-- <p-fileUpload name="myfile[]" [multiple]="true" [customUpload]="true" (uploadHandler)="myUploader($event)" [showUploadButton]="false" (onSelect)="ganFile($event)"
+              (onRemove)="xoaGanFile($event)" (onClear)="clearGanFile()"></p-fileUpload> -->
+          </div>
+
+
+          <h5 style="margin-top: 20px;">Nhận xét:</h5>
+          <textarea pInputTextarea [rows]="5" style="width: calc(100%) !important; padding: 5px 10px;"
+            [(ngModel)]="nhanXet"></textarea>
+          <div style="text-align: center; margin-top: 30px;">
+            <button pButton type="button" class="p-button-raised p-button-help" style="padding: 12px 15px;"
+              (click)="postDanhGia(sanPhamDanhGia.id)">Đánh giá <i class="fa-solid fa-pen"
+                style="margin-left: 20px;"></i></button>
+          </div>
+        </div>
+        <div class="listDanhGia__container">
+        </div>
+
+      </div>
+    </p-dialog>
+    <p-dialog header="Xem Đánh giá" [(visible)]="displayXemDanhGia" [style]="{width: '800px'}" [draggable]="false"
+      [modal]="true" [maximizable]="true">
+      <div class="hang3" *ngFor="let item of sanPhamDanhGiaXem" style="margin-bottom: 20px;">
+        <div style="color: rgb(82, 23, 138); display: flex; justify-content: space-between; margin-bottom: 10px;">
+          <h5>Ngày đánh giá:</h5>
+          <h5>{{item.created | dateFormat}}</h5>
+        </div>
+        <div class="userDanhGia__container">
+          <div class="sanPhamDanhGia" style="display: flex; margin-bottom: 20px;">
+
+            <div class="spdg_anh" style="margin-right: 20px;">
+              <img [src]="item.imageUrls" style="width: 70px; height: 80px; object-fit: cover;">
+            </div>
+            <div class="spdh_mota">
+              <p style="font-weight: bold;">{{item.title}}</p>
+              <p>Code: {{item.code}}</p>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; margin-left: 120px;">
+              <p-rating [stars]="5" [cancel]="false" [(ngModel)]="item.stars" [readonly]="true"></p-rating>
+            </div>
+          </div>
+          <hr />
+          <div style="margin-bottom: 20px;" class="uploadFile">
+
+          </div>
+          <div class="nguoidung" style="display: flex; margin-bottom: 20px;">
+
+            <div class="spdh_mota">
+              <p style="font-weight: bold;">ID: <span style="font-weight: 500">{{item.userId}}</span></p>
+              <p style="font-weight: bold;">Tên: <span style="font-weight: 500">{{item.fullName}}</span></p>
+            </div>
+          </div>
+
+          <h5 style="margin-top: 20px;">Nhận xét:</h5>
+          <textarea pInputTextarea [rows]="5" style="width: calc(100%) !important; padding: 5px 10px;"
+            [(ngModel)]="item.comment" [disabled]="true"></textarea>
+
+        </div>
+        <hr />
+      </div>
+    </p-dialog>
+  </div>
+</div>
+<p-toast></p-toast>

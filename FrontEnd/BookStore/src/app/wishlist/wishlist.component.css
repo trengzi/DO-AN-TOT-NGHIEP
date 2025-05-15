@@ -1,0 +1,101 @@
+.item{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+.cot1 img{
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+.cot2 div{
+
+}
+.cot3{
+  display: flex;
+  align-items: center;
+}
+.cot4{
+  display: flex;
+  align-items: center;
+}
+.item__name{
+  font-size: 22px;
+}
+.cart__product{
+  display: flex;
+}
+.div1, .div2{
+  display: flex;
+}
+.item--container, .sum{
+  padding: 0 20px;
+}
+.cot1, .cot2, .cot3, .cot4{
+  padding: 5px 10px;
+}
+.gia{
+  font-weight: 700;
+}
+.item{
+  position: relative;
+}
+.item::before{
+  content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(to right, #c8e4ff, #fff);
+      transition: 0.5s ease;
+}
+.item:hover{
+  cursor: pointer;
+}
+
+.item:hover::before{
+  width: 100%;
+}
+
+label {
+  display: inline-block;
+  position: relative;
+  padding: 13px;
+  cursor: pointer;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+:host ::ng-deep .listsize__container .p-button{
+  padding: 5px 7px;
+  margin-right: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  border: solid 1px lightblue;
+}
+
+:host ::ng-deep .item__size .p-button{
+  padding: 5px 7px;
+  margin-right: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  border: solid 1px lightblue;
+}
+
+
+ span div{
+  width: 30px;
+  height: 30px;
+  border: solid lightgray 1px;
+  border-radius: 50%;
+  margin-top: 0px !important;
+  margin-left: 20px;
+}
+
+.fontroboto{
+  font-family: 'roboto';
+}

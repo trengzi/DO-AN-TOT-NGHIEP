@@ -1,0 +1,42 @@
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+data-sidebar-position="fixed" data-header-position="fixed">
+  <div class="body-wrapper">
+    <!--  Header Start -->
+
+    <!--  Header End -->
+    <div class="body-wrapper-inner">
+      <div style="margin-top: 10px; padding: 40px 0 20px 0;">
+        <div class="container">
+          <div class="listSupport__container">
+            <h3 style="text-align: center; margin-bottom: 20px;">Hỗ trợ người dùng</h3>
+            <div class="listAccount" *ngIf="!listUser">
+              <p-progressBar mode="indeterminate"></p-progressBar>
+            </div>
+            <div class="listAccount" *ngIf="listUser">
+              <div *ngFor="let item of listUser">
+                <div style="display: flex; margin-bottom: 10px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14); padding: 10px; width: calc(50% - 10px); float: left; margin-right: 10px; cursor: pointer;" class="item_user" routerLink="/employee/chatbox/{{item.userId}}">
+                  <div style="margin-right: 20px; display: flex; align-items: center; justify-content: center;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/8750/8750683.png" style="width: 50px; height: 50px; object-fit: cover;">
+                  </div>
+                  <div>
+                    <div style="display: flex;">
+                      <p style="margin-right: 30px; font-weight: 700; color: rgb(98, 51, 143); opacity: 0.9; margin-bottom: 0;">{{item.fullName}}</p>
+                      <p style="font-weight: 700; opacity: 0.8; margin-bottom: 0;">Username: {{item.email}}</p>
+                    </div>
+                    <div>
+                      <p style=" padding: 10px 0; font-weight: 600;" *ngIf="item.tinNhanGanNhat">{{item.tinNhanGanNhat}}</p>
+                      <p style=" padding: 10px 0; color:lightgray;" *ngIf="!item.tinNhanGanNhat">Chưa có cuộc trò truyện nào</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>Không được nặng lời với khách hàng</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
